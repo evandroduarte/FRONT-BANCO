@@ -10,6 +10,7 @@ import forongs from '../../assets/forongs.png';
 function LoginONG(){
     return (
         <div className="logon-container">
+            <div className="content">
             <section className="form">
             <img src={forongs} alt="bannner" className="banner"/>
                 <form>
@@ -22,6 +23,7 @@ function LoginONG(){
                     </Link>
                 </form>
                 </section>
+                </div>
                 </div>
     );
 };

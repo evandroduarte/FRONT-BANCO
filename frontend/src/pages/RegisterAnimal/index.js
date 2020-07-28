@@ -4,7 +4,7 @@ import './styles.css';
 
 import logo from '../../assets/logo_semfundo.png';
 
-function RegisterLostAnimal(){
+function Registeranimal(){
     return (
         <div className="register-container">
             <div className="content">
@@ -28,4 +28,4 @@ function RegisterLostAnimal(){
     );
 };
 
-export default RegisterLostAnimal;
+export default Registeranimal;
