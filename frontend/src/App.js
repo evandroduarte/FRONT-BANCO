@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
-import './global.css';
+/*import './global.css';*/
+import GlobalStyle from './styles';
+import { BrowserRouter } from 'react-router-dom'
 
 import Routes from './routes';
 
 function App() {
   return (
-    <Routes />
+    <BrowserRouter>
+      <GlobalStyle />
+        <Routes />
+    </BrowserRouter>
   );
 }
 

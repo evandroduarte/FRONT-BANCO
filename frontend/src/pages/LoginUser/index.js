@@ -6,22 +6,22 @@ import { FiLogIn } from 'react-icons/fi';
 /*import './styles.css';*/
 import {Fundo, Content} from './styles'
 
-import forongs from '../../assets/forongs.png';
+import foruser from '../../assets/forhelpers.png';
 
 function LoginONG(){
     return (
         <Fundo>
             <Content>
                 
-                <img src={forongs} alt="bannner" className="banner"/>
+                <img src={foruser} alt="bannner" className="banner"/>
                     <form>
                         <input placeholder="E-mail" />
                         <input placeholder="Senha" />
                         <button type="submit">Entrar</button>
                         <div className="cadastro">
-                            <Link to="/registerong" className="btn">
+                            <Link to="/register" className="btn">
                                 <FiLogIn size={24} color="#463B88" />
-                                Minha ONG não tem cadastro
+                                Não tenho cadastro
                             </Link>
                         </div>
                     </form>

@@ -3,6 +3,7 @@ import React from 'react';
 
 import Home from './pages/Home';
 import LoginONG from './pages/LoginONG';
+import LoginUser from './pages/LoginUser';
 import RegisterONG from './pages/RegisterONG';
 
 
@@ -13,6 +14,7 @@ export default function Routes(){
             <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/loginong" component={LoginONG} />
+            <Route path="/loginuser" component={LoginUser} />
             <Route path="/registerong" component={RegisterONG} />
             </Switch>
         </BrowserRouter>
