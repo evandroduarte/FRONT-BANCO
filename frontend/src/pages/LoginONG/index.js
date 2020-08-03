@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi';
 
 
-import './styles.css';
+/*import './styles.css';*/
+import {Fundo, Content} from './styles'
 
 import forongs from '../../assets/forongs.png';
 
