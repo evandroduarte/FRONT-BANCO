@@ -14,49 +14,61 @@ export const Fundo = styled.div`
 export const Content = styled.div`
     width: 70%;
     display: flex;
+    justify-content: space-between;
+    
+`;
+
+export const Informacoes = styled.div`
+    width: 53%;
+    height: 60%;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     
+
+    p{
+        text-align: justify;
+        font-weight: normal;
+        font-size: 18px;
+    }
     
+    
+`;
+
+export const Formulario = styled.div`
+    padding-top: 7%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+                    
     form{
         display: flex;
         flex-direction: column;
-        margin-top: -40px;
-        width: 40%;
+        
     }
     input{
         width: 100%;
         height: 50px;
         margin-top: 10px;
     }
+       
+    .input-city{
+        width: 78%;
+    }
+    .input-uf{
+        margin-left: 10px;
+        width: 19%;
+    }
+    
     button{
-        width: 100%;
         height: 50px;
         margin-top: 10px;
         background: #453C8A;
         border-radius: 10px;
         color: #FFFFFF;
     }
-    .cadastro{
-        margin-top: 10px;
-        
-    }
-    .btn{
-        display: flex;
-        align-items: center;
-        margin-top: 10px;
-        margin-left: 5px;
-        color: #453C8A;
-        font-size: 18px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: opacity 0.2s;
-
-        p{
-            margin-left: 5px;
-        }
-    }
-
-    
 `;

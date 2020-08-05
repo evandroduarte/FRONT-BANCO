@@ -5,6 +5,7 @@ import React from 'react';
 
 import {Fundo, Content, Informacoes, Formulario} from './styles'
 import { FiUpload } from 'react-icons/fi';
+import Helmet from 'react-helmet'
 import logo from '../../assets/logo_semfundo.png';
 
 function RegisterONG(){
@@ -12,6 +13,7 @@ function RegisterONG(){
         <Fundo>
             <Content>
                 <Informacoes>
+                    <Helmet title="Cadastro ONG" />
                     <section>
                             <img src={logo} alt="bannner" className="banner"/>
                             <h1>Faça o cadastro da sua ONG</h1>

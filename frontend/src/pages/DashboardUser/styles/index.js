@@ -2,12 +2,11 @@ import styled from 'styled-components';
 
 export const Fundo = styled.div`
     width: 100%;
-    
+    max-width: 1300px;
     margin: 0 auto auto auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    
     color: #463B88;
 `;
 
@@ -15,86 +14,55 @@ export const Content = styled.div`
     width: 70%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    
+`;
 
-    .bemVindo{
-        width: 85%;
+export const Header = styled.div`
+    width: 100%;
+    max-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    
+    img{
+        height: 100%;
+        width: 18%;
+        
     }
-    .btnBemVindo{
+
+    .info{
         display: flex;
         align-items: center;
-        width: 73%;
-        justify-content: space-between;
-    }
-    button{
-        width: 40%;
-        height: 50px;
-        margin-top: 10px;
-        background: #453C8A;
-        border-radius: 10px;
-        color: #FFFFFF;
-    }
-    
-    .subTitulo{
-        font-size: 18px;
-    }
-`;
-
-export const Banner = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img{
-        width: 73%;
-    }
-    
-`;
-
-export const QmSomos = styled.div`
-    width: 85%;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    .aboutUs{
-        img{
-            width: 40%;
-        }
-    }
-    
-
-    .aboutUsContent{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
+        width: 28%;
+        height: 100%;
         
-        p{
-            text-align: justify;
-            font-weight: normal;
-            font-size: 18px;
-        }
-        img{
-            width: 50%;
-        }
     }
-`;
+    .link{
+        margin-left: 5px;
+        text-decoration: none;
+        color: #463B88;
+    }
+    .menu{
+        border: solid 1px;
+        margin-left: 10px;
+    }
+    .menu:hover{
+        cursor: pointer;
+    }
 
-export const CausasTitulo = styled.div`
-    width: 85%;
-    display: flex;
-    margin-top: 30px;
     
 `;
 
 export const Listagem = styled.div`
-    width: 87%;
+    width: 100%;
     min-height: 1300px;
     display: flex;
     justify-content: space-between; 
     padding-left: 10px;
     padding-right: 10px;
-    margin-top: 30px;
+    margin-top: 10px;
 
     .titulos{
         width: 60%;
@@ -157,12 +125,12 @@ export const CardAnimal = styled.div`
         justify-content: center;
 
         h3,p{
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         .localizacao{
             display: flex;
-            margin-top: 10px;
+            margin-top: 20px;
             h4{
                 margin-left: 5px;
             }
@@ -213,12 +181,12 @@ export const CardONG = styled.div`
         justify-content: center;
 
         h3,p{
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         .localizacao{
             display: flex;
-            margin-top: 10px;
+            margin-top: 20px;
             h4{
                 margin-left: 5px;
             }
