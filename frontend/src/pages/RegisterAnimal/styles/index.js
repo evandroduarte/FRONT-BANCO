@@ -47,7 +47,9 @@ export const Formulario = styled.div`
                     
     form{
         display: flex;
+        width: 100%;
         flex-direction: column;
+        
         
     }
     input{
@@ -55,48 +57,25 @@ export const Formulario = styled.div`
         height: 50px;
         margin-top: 10px;
     }
-
-    input[type="file"] {
-        display: none;
-    }
-    label{
+       
+    textarea{
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        height: 200px;
         margin-top: 10px;
-        h2{
-            margin-left: 10px;
-        }
+        color: #333333;
+        border: 1px solid #dcdce6;
+        border-radius: 8px;
+        padding-left: 24px;
+        padding-top: 5px;
+        padding-right: 24px;
+        resize: none;
     }
-    label:hover{
-        cursor: pointer;
-    }
-    .input-end{
-        width: 75%;
-    }
-    .input-num{
-        margin-left: 10px;
-        width: 22%;
-    }
-    .input-comp{
-        width: 59%;
-    }
-    .input-cep{
-        width: 38%;
-        margin-left: 10px;
-    }
-    .input-city{
-        width: 78%;
-    }
-    .input-uf{
-        margin-left: 10px;
-        width: 19%;
+    input[type="date"] {
+        color: #333333;
     }
     
     button{
-        height: 50px;
-        margin-bottom: 10px;
+        height: 40px;
         margin-top: 10px;
         background: #453C8A;
         border-radius: 10px;

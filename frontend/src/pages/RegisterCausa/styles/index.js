@@ -28,6 +28,7 @@ export const Informacoes = styled.div`
     
 
     p{
+        margin-top: 10px;
         text-align: justify;
         font-weight: normal;
         font-size: 18px;
@@ -47,7 +48,9 @@ export const Formulario = styled.div`
                     
     form{
         display: flex;
+        width: 100%;
         flex-direction: column;
+        
         
     }
     input{
@@ -55,11 +58,57 @@ export const Formulario = styled.div`
         height: 50px;
         margin-top: 10px;
     }
+       
+    textarea{
+        width: 100%;
+        height: 200px;
+        margin-top: 10px;
+        color: #333333;
+        border: 1px solid #dcdce6;
+        border-radius: 8px;
+        padding-left: 24px;
+        padding-top: 10px;
+        padding-right: 24px;
+        resize: none;
+    }
+    input[type="date"] {
+        color: #333333;
+    }
+    
+    button{
+        height: 50px;
+        margin-top: 10px;
+        background: #453C8A;
+        border-radius: 10px;
+        color: #FFFFFF;
+    }
+
+    label{
+        font-size: 15px;
+        margin-top: 10px;
+        margin-left: 5px;
+    }
+
+    
+
+    select{
+        width: 98%;
+        height: 50px;
+        margin-top: 10px;
+        margin-left: 5px;
+        border-radius:8px;
+
+    }
+
+    option{
+        font-size: 20px;
+    }
 
     input[type="file"] {
         display: none;
     }
-    label{
+
+    .custom-file-upload{
         width: 100%;
         display: flex;
         align-items: center;
@@ -69,37 +118,7 @@ export const Formulario = styled.div`
             margin-left: 10px;
         }
     }
-    label:hover{
+    .custom-file-upload:hover{
         cursor: pointer;
-    }
-    .input-end{
-        width: 75%;
-    }
-    .input-num{
-        margin-left: 10px;
-        width: 22%;
-    }
-    .input-comp{
-        width: 59%;
-    }
-    .input-cep{
-        width: 38%;
-        margin-left: 10px;
-    }
-    .input-city{
-        width: 78%;
-    }
-    .input-uf{
-        margin-left: 10px;
-        width: 19%;
-    }
-    
-    button{
-        height: 50px;
-        margin-bottom: 10px;
-        margin-top: 10px;
-        background: #453C8A;
-        border-radius: 10px;
-        color: #FFFFFF;
     }
 `;

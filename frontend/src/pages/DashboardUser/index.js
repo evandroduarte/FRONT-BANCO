@@ -1,67 +1,27 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
-/*import './styles.css';*/
-import {Fundo, Content, Banner, QmSomos, CausasTitulo, Listagem, CardONG, CardAnimal, CasosAnimal, CasosONG} from './styles';
-
-
-import { Link } from 'react-router-dom';
-import { FiMapPin, FiImage, FiDollarSign } from 'react-icons/fi';
-
-import banner from '../../assets/banner.png';
-import quemSomos from '../../assets/quemSomos.png';
-import aboutBanner from '../../assets/aboutBanner.png';
+import {Fundo, Content, Header, Listagem, CasosONG, CasosAnimal, CardAnimal, CardONG} from './styles'
+import { FiMapPin, FiUser, FiImage, FiDollarSign } from 'react-icons/fi';
+import Helmet from 'react-helmet'
+import logo from '../../assets/logo_semfundo.png';
 import causasOngs from '../../assets/causasongs.png';
 import animaisPerdidos from '../../assets/animaisperdidos.png';
-import causasTitulo from '../../assets/causastitulo.png';
 
-
-function Login(){
-    
-
+function DashboardUser(){
     return (
         <Fundo>
+            <Helmet title="Home" />
             <Content>
-                <Banner>
-                    <img src={banner} alt="bannner" className="banner"/>
-                </Banner>
-                <div className="bemVindo">
-                    <h1>Bem vindo ao Look For!</h1>
-                    <p className="subTitulo">A plataforma que nos une em prol do bem estar animal</p>
-                    
-                </div>
-                <div className="btnBemVindo">
-                    
-                    <button type="submit" >
-                        <Link to="/loginong" style={{ textDecoration: 'none', color: 'white' }}>
-                            ONG
-                        </Link>
-                    </button>
+                <Header>
+                    <img src={logo} alt="LookFor" className="logoDash" />
+                    <div className="info">
+                        <FiMapPin size={16} color="#463B88" />
+                        <Link className="link" to ="/registeranimal">Cadastrar animal perdido</Link>
+                        <FiUser className="menu" size={48} color="#463B88" />              
                         
-                    
-                    <button type="submit" className="buttonUser">
-                        <Link to="/loginuser" style={{ textDecoration: 'none', color: 'white' }}>
-                            Colaborador
-                        </Link>
-                    </button>
-                </div>
-                <QmSomos>
-                    <div className="aboutUs">
-                        <img src={quemSomos} alt="quemSomos"/>
-                    </div>
-                    <div className="aboutUsContent">
-                        <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <img src={aboutBanner} alt="aboutBanner"/>
-                    </div>
-                    
-                </QmSomos>
-
-                <CausasTitulo>
-                    <img src={causasTitulo} alt="Titulo"/>
-                </CausasTitulo>
-
+                    </div>  
+                </Header>
                 <Listagem>
                     
                     <CasosAnimal>
@@ -69,7 +29,7 @@ function Login(){
                         <CardAnimal>
                             <div className="media">
                                 <FiImage color="#463B88" className="imagem"/>
-                                
+                                <button type="submit"><Link style={{ textDecoration: 'none', color: 'white' }} to ="/cardanimal">Ver Mais</Link></button>
                             </div>
                             <div className="descricao">
                                 <h1>Animal Teste</h1>
@@ -87,7 +47,7 @@ function Login(){
                         <CardAnimal>
                             <div className="media">
                                 <FiImage color="#463B88" className="imagem"/>
-                                
+                                <button type="submit"><Link style={{ textDecoration: 'none', color: 'white' }} to ="/cardanimal">Ver Mais</Link></button>
                             </div>
                             <div className="descricao">
                                 <h1>Animal Teste</h1>
@@ -105,7 +65,7 @@ function Login(){
                         <CardAnimal>
                             <div className="media">
                                 <FiImage color="#463B88" className="imagem"/>
-                                
+                                <button type="submit"><Link style={{ textDecoration: 'none', color: 'white' }} to ="/cardanimal">Ver Mais</Link></button>
                             </div>
                             <div className="descricao">
                                 <h1>Animal Teste</h1>
@@ -126,7 +86,7 @@ function Login(){
                         <CardONG>
                             <div className="media">
                                 <FiImage color="#463B88" className="imagem"/>
-                                
+                                <button type="submit"><Link style={{ textDecoration: 'none', color: 'white' }} to ="/cardcausa">Ver Mais</Link></button>
                             </div>
                             <div className="descricao">
                                 <h1>ONG Teste</h1>
@@ -144,7 +104,7 @@ function Login(){
                         <CardONG>
                             <div className="media">
                                 <FiImage color="#463B88" className="imagem"/>
-                                
+                                <button type="submit"><Link style={{ textDecoration: 'none', color: 'white' }} to ="/cardcausa">Ver Mais</Link></button>
                             </div>
                             <div className="descricao">
                                 <h1>ONG Teste</h1>
@@ -162,7 +122,7 @@ function Login(){
                         <CardONG>
                             <div className="media">
                                 <FiImage color="#463B88" className="imagem"/>
-                                
+                                <button type="submit"><Link style={{ textDecoration: 'none', color: 'white' }} to ="/cardcausa">Ver Mais</Link></button>
                             </div>
                             <div className="descricao">
                                 <h1>ONG Teste</h1>
@@ -180,10 +140,8 @@ function Login(){
                     </CasosONG>
                 </Listagem>
             </Content>
-            
         </Fundo>
-        
     );
 };
 
-export default Login;
+export default DashboardUser;

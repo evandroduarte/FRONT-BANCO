@@ -37,3 +37,4 @@ export default createGlobalStyle`
         padding: 0 24px;
     }
 `;
+

@@ -46,10 +46,15 @@ export const Content = styled.div`
         display: flex;
         align-items: center;
         margin-top: 10px;
+        margin-left: 5px;
         color: #453C8A;
         font-size: 18px;
         text-decoration: none;
         font-weight: 500;
         transition: opacity 0.2s;
+        
+        p{
+            margin-left: 5px;
+        }
     }
 `;
