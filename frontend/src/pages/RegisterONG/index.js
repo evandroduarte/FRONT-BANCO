@@ -5,7 +5,7 @@ import {Fundo, Content, Informacoes, Formulario} from './styles'
 import { FiUpload } from 'react-icons/fi';
 import Helmet from 'react-helmet'
 import logo from '../../assets/logo_semfundo.png';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 
 
@@ -62,7 +62,8 @@ function RegisterONG(){
                 <Formulario>
                     <form className="form" id="form" name="form" onSubmit={handleRegister}>
                         <h2>Preencha com os dados da ONG</h2>
-                        <input 
+                        <input
+                        pattern="[A-Za-z]" 
                         placeholder="Nome da ONG" 
                         required
                         value={ong_name}
@@ -88,7 +89,8 @@ function RegisterONG(){
                         name="ong_street"
                         id="ong_street"
                         />
-                        <input 
+                        <input
+                        pattern="[0-9]" 
                         className="input-num" 
                         placeholder="N°" 
                         required
@@ -97,7 +99,8 @@ function RegisterONG(){
                         name="ong_number"
                         id="ong_number"
                         />
-                        <input 
+                        <input
+                        pattern="[0-9]{8}" 
                         className="input-cep" 
                         placeholder="CEP"
                         value={ong_cep}
@@ -105,7 +108,8 @@ function RegisterONG(){
                         name="ong_cep"
                         id="ong_cep"
                         />
-                        <input 
+                        <input
+                        pattern="[A-Za-z]" 
                         className="input-city" 
                         placeholder="Cidade"
                         value={ong_city}
@@ -151,7 +155,9 @@ function RegisterONG(){
                         
                         
                         <label className="custom-file-upload">
-                            <input type="file" accept="image/png, image/jpeg" onChange={ e => setImage(e.target.files[0])} name="ong_image" id="ong_image"/>
+                            <input type="file" accept="image/png, image/jpeg" 
+                            value={ong_image}
+                            onChange={ e => setImage(e.target.files[0])} name="ong_image" id="ong_image"/>
                             <FiUpload size={48} color="#463B88" />
                             <h2>Selecione uma foto de perfil</h2>
                         </label>

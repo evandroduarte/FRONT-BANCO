@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import {Fundo, Content, Informacoes, Formulario} from './styles'
 
 import React, { useState } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 
 
@@ -34,8 +34,10 @@ function RegisterUser(){
         }
 
         try{
-            const response = await api.post('users', data);
+            await api.post('users', data);
 
+            //console.log(response);
+            
             alert(`Cadastro realizado com sucesso! ${user_name}`);
             history.push('/loginuser');
         }catch(err){
@@ -75,13 +77,14 @@ function RegisterUser(){
                     onChange={ e => setWhatsapp(e.target.value)}
                     />
                     <div className="input-group">
-                    <input 
+                    <input className="input-city" 
                     placeholder="Cidade"
                     value={user_city}
                     onChange={ e => setCity(e.target.value)}
                     />
-                    <input 
-                    placeholder="UF" required maxLength="2" style={{ width: 80 }}
+                    <input className="input-uf" list="uf"
+                    placeholder="UF" 
+                    required
                     value={user_uf}
                     onChange={ e => setUf(e.target.value)}
                     />

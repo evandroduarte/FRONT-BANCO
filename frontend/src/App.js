@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 /*import './global.css';*/
 import GlobalStyle from './styles';
 import { BrowserRouter } from 'react-router-dom'

@@ -8,7 +8,7 @@ import {Fundo, Content} from './styles'
 import Helmet from 'react-helmet'
 import foruser from '../../assets/forhelpers.png';
 
-function LoginONG(){
+function LoginUser(){
     
     const [user_email, setEmail] = useState('');
     const [user_password, setPassword] = useState('');
@@ -21,7 +21,7 @@ function LoginONG(){
         try{
             const response = await api.post('users/session', {user_email, user_password});
 
-            console.log(response);
+            //console.log(response);
 
             sessionStorage.setItem('userName', response.data.user_name);
             sessionStorage.setItem('userToken', response.data.user_token);
@@ -66,4 +66,4 @@ function LoginONG(){
     );
 };
 
-export default LoginONG;
+export default LoginUser;
