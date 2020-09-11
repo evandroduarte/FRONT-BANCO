@@ -15,7 +15,6 @@ export const Content = styled.div`
     width: 70%;
     display: flex;
     justify-content: space-between;
-    
 `;
 
 export const Informacoes = styled.div`

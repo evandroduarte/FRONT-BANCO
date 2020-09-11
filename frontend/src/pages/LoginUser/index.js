@@ -10,8 +10,8 @@ import foruser from '../../assets/forhelpers.png';
 
 function LoginONG(){
     
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [user_email, setEmail] = useState('');
+    const [user_password, setPassword] = useState('');
 
     const history = useHistory();
 
@@ -19,11 +19,13 @@ function LoginONG(){
         e.preventDefault();
 
         try{
-            const response = await api.post('users/session', {email, password});
+            const response = await api.post('users/session', {user_email, user_password});
 
             console.log(response);
 
-            localStorage.setItem('userName', response.data.name);
+            sessionStorage.setItem('userName', response.data.user_name);
+            sessionStorage.setItem('userToken', response.data.user_token);
+            sessionStorage.setItem('userId', response.data.user_id);
 
             history.push('/');
         }catch(err){
@@ -40,14 +42,14 @@ function LoginONG(){
                         <input 
                         placeholder="E-mail"
                         required 
-                        value= {email}
+                        value= {user_email}
                         onChange={e => setEmail(e.target.value)}
                         />
                         <input 
                         placeholder="Senha" 
                         required
                         type="password"
-                        value= {password}
+                        value= {user_password}
                         onChange={e => setPassword(e.target.value)}
                         />
                         <button type="submit">Entrar</button>
