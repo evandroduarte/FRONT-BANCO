@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 /*import './styles.css';*/
 import {Fundo, Content, Banner, QmSomos, CausasTitulo, Listagem, CardONG, CardAnimal, CasosAnimal, CasosONG} from './styles';
 
 
-import { Link } from 'react-router-dom';
-import { FiMapPin, FiImage, FiDollarSign } from 'react-icons/fi';
+import { Link, useHistory } from 'react-router-dom';
+import { FiMapPin } from 'react-icons/fi';
 
 import banner from '../../assets/banner.png';
 import quemSomos from '../../assets/quemSomos.png';
@@ -13,10 +13,44 @@ import aboutBanner from '../../assets/aboutBanner.png';
 import causasOngs from '../../assets/causasongs.png';
 import animaisPerdidos from '../../assets/animaisperdidos.png';
 import causasTitulo from '../../assets/causastitulo.png';
+import api from '../../services/api';
+import { useEffect } from 'react';
 
 
 function Login(){
-    
+
+        const [incidents, setIncidents] = useState([]);
+        const [lostanimals, setLostAnimals] = useState([]);
+
+        const history = useHistory();
+        
+        useEffect(() => {
+            api.get('lostanimals').then(response => {
+                setLostAnimals(response.data);
+            })
+        }, []);
+
+
+        useEffect(() => {
+            api.get('donationrequest').then(response => {
+                setIncidents(response.data);
+            })
+        }, []);
+
+        function handleLogout() {
+            localStorage.clear();
+        
+            history.push('/');
+          }
+
+
+        function formatDate (input) {
+            var datePart = input.match(/\d+/g),
+            year = datePart[0].substring(2), // get only two digits
+            month = datePart[1], day = datePart[2];
+          
+            return day+'/'+month+'/'+year;
+          }
 
     return (
         <Fundo>
@@ -66,117 +100,47 @@ function Login(){
                     
                     <CasosAnimal>
                         <img src={animaisPerdidos} alt="Animais Perdidos" className="titulos" />
-                        <CardAnimal>
-                            <div className="media">
-                                <FiImage color="#463B88" className="imagem"/>
-                                
-                            </div>
-                            <div className="descricao">
-                                <h1>Animal Teste</h1>
-                                <p>
-                                    Descrição Descrição Descrição Descrição Descrição Descrição
-                                    Descrição Descrição Descrição Descrição Descrição Descrição Descrição
-                                </p>
-                                <h3>Data/Data/Data</h3>
+                        <ul className="list">
+                            {lostanimals.map(lostanimal => (
+                                <li key = {lostanimal.LA_id}>
+                                <CardAnimal>
+                                        <div className="media">
+                                        <img src={(lostanimal.LA_image).replace('uploads', 'http://localhost:3333')} className="imagem" alt="Lost Animal"/>
+                                        </div>
+                                <div className="descricao">
+                                <p>{lostanimal.LA_description}</p>
+                                <h3>{formatDate(lostanimal.LA_date)}</h3>
                                 <div className="localizacao">
                                     <FiMapPin size={16} color="#463B88" /> 
                                     <h4>Localização</h4>
                                 </div>
                             </div>
                         </CardAnimal>
-                        <CardAnimal>
-                            <div className="media">
-                                <FiImage color="#463B88" className="imagem"/>
-                                
-                            </div>
-                            <div className="descricao">
-                                <h1>Animal Teste</h1>
-                                <p>
-                                    Descrição Descrição Descrição Descrição Descrição Descrição
-                                    Descrição Descrição Descrição Descrição Descrição Descrição Descrição
-                                </p>
-                                <h3>Data/Data/Data</h3>
-                                <div className="localizacao">
-                                    <FiMapPin size={16} color="#463B88" /> 
-                                    <h4>Localização</h4>
-                                </div>
-                            </div>
-                        </CardAnimal>
-                        <CardAnimal>
-                            <div className="media">
-                                <FiImage color="#463B88" className="imagem"/>
-                                
-                            </div>
-                            <div className="descricao">
-                                <h1>Animal Teste</h1>
-                                <p>
-                                    Descrição Descrição Descrição Descrição Descrição Descrição
-                                    Descrição Descrição Descrição Descrição Descrição Descrição Descrição
-                                </p>
-                                <h3>Data/Data/Data</h3>
-                                <div className="localizacao">
-                                    <FiMapPin size={16} color="#463B88" /> 
-                                    <h4>Localização</h4>
-                                </div>
-                            </div>
-                        </CardAnimal>
+                                </li>
+                            ))}
+                        </ul>
                     </CasosAnimal>
                     <CasosONG>
                         <img src={causasOngs} alt="Causas Ongs" className="titulos" />
-                        <CardONG>
-                            <div className="media">
-                                <FiImage color="#463B88" className="imagem"/>
-                                
-                            </div>
-                            <div className="descricao">
-                                <h1>ONG Teste</h1>
-                                <p>
-                                    Descrição Descrição Descrição Descrição Descrição Descrição
-                                    Descrição Descrição Descrição Descrição Descrição Descrição Descrição
-                                </p>
-                                <h3>Data/Data/Data</h3>
+                        <ul>
+                            {incidents.map(incident => (
+                                <li key = {incident.DR_id}>
+                                <CardONG>
+                                    <div className="media">
+                                <img src = {(incident.ong_image).replace('uploads', 'http://localhost:3333')} className="imagem" alt= "Ong"/>
+                                    </div>
+                                <div className="descricao">
+                                <h1>{incident.ong_name}</h1>
+                                <p>{incident.DR_description}</p>
+                                <h4>{formatDate(incident.DR_date)}</h4>
                                 <div className="localizacao">
-                                    <FiDollarSign size={16} color="#463B88" /> 
-                                    <h4>Valor</h4>
+                                    <h3>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(incident.DR_money)}</h3>
                                 </div>
                             </div>
                         </CardONG>
-                        <CardONG>
-                            <div className="media">
-                                <FiImage color="#463B88" className="imagem"/>
-                                
-                            </div>
-                            <div className="descricao">
-                                <h1>ONG Teste</h1>
-                                <p>
-                                    Descrição Descrição Descrição Descrição Descrição Descrição
-                                    Descrição Descrição Descrição Descrição Descrição Descrição Descrição
-                                </p>
-                                <h3>Data/Data/Data</h3>
-                                <div className="localizacao">
-                                    <FiDollarSign size={16} color="#463B88" /> 
-                                    <h4>Valor</h4>
-                                </div>
-                            </div>
-                        </CardONG>
-                        <CardONG>
-                            <div className="media">
-                                <FiImage color="#463B88" className="imagem"/>
-                                
-                            </div>
-                            <div className="descricao">
-                                <h1>ONG Teste</h1>
-                                <p>
-                                    Descrição Descrição Descrição Descrição Descrição Descrição
-                                    Descrição Descrição Descrição Descrição Descrição Descrição Descrição
-                                </p>
-                                <h3>Data/Data/Data</h3>
-                                <div className="localizacao">
-                                    <FiDollarSign size={16} color="#463B88" /> 
-                                    <h4>Valor</h4>
-                                </div>
-                            </div>
-                        </CardONG>
+                                </li>
+                            ))}
+                        </ul>
                     </CasosONG>
                 </Listagem>
             </Content>

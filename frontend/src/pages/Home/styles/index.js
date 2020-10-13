@@ -100,6 +100,10 @@ export const Listagem = styled.div`
         width: 60%;
         height: 3.5%;
     }
+
+    ul{
+        list-style-type: none;
+    }
 `;
 
 export const CasosONG = styled.div`
@@ -226,4 +230,5 @@ export const CardONG = styled.div`
         
         
     }
+
 `;
