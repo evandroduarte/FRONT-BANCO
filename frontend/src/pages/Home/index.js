@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 /*import './styles.css';*/
 import {Fundo, Content, Banner, QmSomos, CausasTitulo, Listagem, CardONG, CardAnimal, CasosAnimal, CasosONG} from './styles';
 
+/* Simple Bar import */
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
 
 import { Link, useHistory } from 'react-router-dom';
 import { FiMapPin } from 'react-icons/fi';
@@ -97,9 +100,9 @@ function Login(){
                 </CausasTitulo>
 
                 <Listagem>
-                    
                     <CasosAnimal>
                         <img src={animaisPerdidos} alt="Animais Perdidos" className="titulos" />
+                     <SimpleBar style={{ height: '1300px' }}>
                         <ul className="list">
                             {lostanimals.map(lostanimal => (
                                 <li key = {lostanimal.LA_id}>
@@ -119,10 +122,12 @@ function Login(){
                                 </li>
                             ))}
                         </ul>
+                    </SimpleBar>
                     </CasosAnimal>
                     <CasosONG>
                         <img src={causasOngs} alt="Causas Ongs" className="titulos" />
-                        <ul>
+                        <SimpleBar style={{ height: '1300px' }}>
+                            <ul>
                             {incidents.map(incident => (
                                 <li key = {incident.DR_id}>
                                 <CardONG>
@@ -141,6 +146,7 @@ function Login(){
                                 </li>
                             ))}
                         </ul>
+                        </SimpleBar>
                     </CasosONG>
                 </Listagem>
             </Content>

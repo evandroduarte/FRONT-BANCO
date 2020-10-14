@@ -108,13 +108,13 @@ export const Listagem = styled.div`
 
 export const CasosONG = styled.div`
     width: 48%;
-    min-height: 1300px;
+    height: 1300px;
     display: flex;
-    flex-direction: column;  
+    flex-direction: column;
 `;
 export const CasosAnimal = styled.div`
     width: 48%;
-    min-height: 1300px;
+    height: 1300px;
     display: flex;
     flex-direction: column;
 `;
