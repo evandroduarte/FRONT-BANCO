@@ -13,7 +13,7 @@ import "./styles.css";
 
 
 export default function PainelAdm() {
-  const [seletorTela, setSeletor] = useState(1);
+  const [seletorTela, setSeletor] = useState(0);
 
   return (
     <div className="container">
@@ -50,6 +50,9 @@ export default function PainelAdm() {
 }
 
 function GerenciarTelas(escolha) {
+  const [itens, setItens] = useState([1]);
+  const [contador, setContador] = useState(0);
+
   switch (escolha) {
     case 0:
       return TelaHome();
@@ -62,7 +65,7 @@ function GerenciarTelas(escolha) {
     case 4:
       return TelaGerenciarPedido();
   }
-}
+
 
 /**
  * TELAS
@@ -90,8 +93,6 @@ function TelaHome() {
 }
 
 function TelaNovaDoacao() {
-  const [itens, setItens] = useState([{"descricao":"", "quantidade":"", "tipo":""}]);
-  const [contador, setContador] = useState(0);
 
   return (
     <div className="card-centro">
@@ -210,4 +211,6 @@ function TelaGerenciarDoacao() {
 
 function TelaGerenciarPedido() {
   return <div>Gerenciar Pedido</div>;
+}
+
 }
