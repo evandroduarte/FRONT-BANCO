@@ -1,0 +1,185 @@
+body,
+html {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+.container {
+  background: white;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.col-esq {
+  height: 100%;
+  padding-top: 2rem;
+  background: #463b88;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  width: 20%;
+}
+
+.botoes-col-esq {
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 11rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+
+  text-align: justify;
+  margin-bottom: 30px;
+  border-radius: 3px;
+  background-color: white;
+}
+.botoes-col-esq:hover {
+  font-weight: bold;
+  background: #e2e3e4;
+}
+
+.col-centro {
+  margin-top: 1rem;
+  margin-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+  overflow-y:auto;
+  display: flex;
+  flex-direction: column;
+
+  width: 85%;
+}
+
+.card-centro {
+  background-color: #463b88;
+  border-radius: 1rem;
+  padding: 1.2rem;
+
+  color: white;
+}
+
+.col-centro .nome-ong {
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  font-size: 2.5rem;
+
+  /* border-bottom-style: solid; */
+}
+
+.col-centro .informacao-ong {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.75rem;
+
+  border-bottom-style: solid;
+  border-width: 2px;
+}
+
+.col-centro .texto-ong {
+  font-size: 1.2rem;
+  text-align: justify;
+  text-indent: 1.5rem;
+}
+
+.col-dir {
+  margin-left: auto;
+  margin-right: 1rem;
+
+  width: 15%;
+}
+
+/* 
+  Tela Doacao
+*/
+
+.div-inputDado {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.div-salvar{
+  display: flex;
+}
+
+.div-inputDado label {
+  font-size: 1.2rem;
+  text-align: justify;
+}
+
+.div-inputDado input {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  width: 100%;
+  border-radius: 5px;
+  border-style: none;
+}
+
+.div-inputDado select {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  width: 100%;
+  border-radius: 5px;
+  border-style: none;
+  background-color: white;
+  font-size: 1.2rem;
+}
+
+.div-inputDado input:focus, select:focus {
+  background-color: #f4e3ff;
+}
+
+#salvar-doacao{
+  margin-left: auto;
+  margin-right: 0rem;
+  color: #463b88;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: White;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.3rem;
+}
+
+#doacao-imagem{
+  padding: 0;
+}
+
+.div-itens{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 5px;
+  margin-bottom: 10px;
+}
+
+.div-itens input{
+  width: 32%;
+  align-self: center;
+  margin: 0;
+}
+
+.sinal{
+  font-size: large;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.linha{
+  display: flex;
+  flex-direction: row;
+}
+
+.sinais{
+  margin-left: auto;
+  margin-right: 5px;
+  display: flex;
+}
