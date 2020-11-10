@@ -30,8 +30,10 @@ html {
   color: black;
   font-size: 1rem;
   font-weight: 500;
-  width: 11rem;
+  width: 75%;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
+
+  cursor: pointer;
 
   text-align: justify;
   margin-bottom: 30px;
@@ -182,4 +184,74 @@ html {
   margin-left: auto;
   margin-right: 5px;
   display: flex;
+}
+
+/*
+  Tela Gerenciar Doações
+*/
+
+.espacamento-inferior{
+  margin-bottom: 1rem;
+}
+
+.div-inputDado p {
+  font-size: 1.2rem;
+  text-align: justify;
+  display: contents;
+}
+
+.linha p{
+  display: contents;
+}
+
+.div-itens{
+  display: flex;
+  justify-content: center;
+}
+
+.descricao-item{
+  margin-left: 5px;
+}
+
+.quantidade-item{
+  text-align: center;
+}
+
+.tipo-item{
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: white;
+  color: #463b88;
+}
+
+.botoes-linha{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#excluir-doacao{
+  margin-left: auto;
+  margin-right: 0rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: red;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.3rem;
 }

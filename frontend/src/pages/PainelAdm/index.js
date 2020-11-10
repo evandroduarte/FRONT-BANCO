@@ -8,12 +8,10 @@ import { faPrayingHands } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 
-
 import "./styles.css";
 
-
 export default function PainelAdm() {
-  const [seletorTela, setSeletor] = useState(0);
+  const [seletorTela, setSeletor] = useState(3);
 
   return (
     <div className="container">
@@ -30,9 +28,9 @@ export default function PainelAdm() {
         <a className="botoes-col-esq" onClick={() => setSeletor(1)}>
           <FontAwesomeIcon icon={faPrayingHands} /> Nova Doação
         </a>
-        <a className="botoes-col-esq" onClick={() => setSeletor(2)}>
+        {/* <a className="botoes-col-esq" onClick={() => setSeletor(2)}>
           <FontAwesomeIcon icon={faDog} /> Animal Perdido
-        </a>
+        </a> */}
         <a className="botoes-col-esq" onClick={() => setSeletor(3)}>
           Gerenciar Doações
         </a>
@@ -65,7 +63,6 @@ function GerenciarTelas(escolha) {
     case 4:
       return TelaGerenciarPedido();
   }
-
 
 /**
  * TELAS
@@ -206,7 +203,121 @@ function TelaAnimalPerdido() {
 }
 
 function TelaGerenciarDoacao() {
-  return <div>Gerenciar Doacao</div>;
+  let dados_doacoes = [ {descricao: "qualquer info", urgencia: 2, imagem: "", dataExpiracao:"13/11/2020", valor: 5, itens:[{descricao: "ração", quantidade: 30, tipo: "quilo"},{descricao: "água", quantidade: 30, tipo: "quilo"}]},
+                        {descricao: "Gatos", urgencia: 2, imagem: "", dataExpiracao:"13/11/2020", valor: 5, itens:[{descricao: "ração", quantidade: 30, tipo: "quilo"}]},
+                        {descricao: "qualquer info", urgencia: 2, imagem: "", dataExpiracao:"13/11/2020", valor: 5, itens:[{descricao: "ração", quantidade: 30, tipo: "quilo"}]},
+                        {descricao: "qualquer info", urgencia: 2, imagem: "", dataExpiracao:"13/11/2020", valor: 5, itens:[{descricao: "ração", quantidade: 30, tipo: "quilo"}]},
+                        {descricao: "qualquer info", urgencia: 2, imagem: "", dataExpiracao:"13/11/2020", valor: 5, itens:[{descricao: "ração", quantidade: 30, tipo: "quilo"}]}]
+
+  return (
+    dados_doacoes.map(function(dado,index){
+      return (
+        <div className="card-centro espacamento-inferior">
+          <h2 className="informacao-ong">Doação Cadastrada</h2>
+          <div className="div-inputDado">
+            <p>Descrição: </p>
+            <p>{dado.descricao}</p>
+          </div>
+    
+          <div className="div-inputDado">
+            <p>Urgência: </p>
+            <p>{dado.urgencia}</p>
+          </div>
+    
+          <div className="div-inputDado">
+            <p>Imagem: </p>
+            <p>{dado.imagem}</p>
+          </div>
+    
+          <div className="div-inputDado">
+            <p>Data de Expiração: </p>
+            <p>{dado.dataExpiracao}</p>
+          </div>
+    
+          <div className="div-inputDado">
+            <p>Valor: </p>
+            <p>{dado.valor}</p>
+          </div>
+    
+          <div className="div-inputDado">
+            <div className="linha">
+              <p>Itens Necessários</p>
+
+            </div>
+            <div className="div-itens" key={index}>
+              <table className="tabela-item">
+              <tr className="tabela-cabecalho">
+                <th>Item</th>
+                <th>Quantidade</th>
+                <th>Descrição</th>
+              </tr>
+              {
+              dado.itens.map(function(item,index){
+                return(
+                  <tr>
+                    <th>{item.descricao}</th>
+                    <th>{item.quantidade}</th>
+                    <th>{item.tipo}</th>
+                  </tr>
+                  )
+                })}
+              </table>
+            </div>
+          </div>
+    
+          <div className="botoes-linha">
+            <div className="div-salvar">
+              <a id="excluir-doacao">
+                Excluir Doação
+              </a>
+            </div>
+
+            <div className="div-salvar">
+              <a id="salvar-doacao">
+                Editar Doação
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    )
+  );
+
+  function SalvarDoacao() {
+    let itens = [];
+
+    for(let aux = 0; aux < contador+1; aux++){
+      let descricao = document.querySelector(`#descricao-item${aux}`).value;
+      let quantidade = document.querySelector(`#qtd-item${aux}`).value;
+      let tipo = document.querySelector(`#tipo-item${aux}`).value;
+
+      itens.push({
+        "descricao": descricao,
+        "quantidade": quantidade,
+        "tipo": tipo
+      });
+    }
+
+  }
+
+  function AdicionarItem(){
+    let descricao = document.querySelector(`#descricao-item${contador}`).value;
+    let quantidade = document.querySelector(`#qtd-item${contador}`).value;
+    let tipo = document.querySelector(`#tipo-item${contador}`).value;
+
+    let itemNovo = {"descricao":descricao, "quantidade":quantidade, "tipo":tipo};
+
+    setItens([itens[contador] = itemNovo,...itens]);
+    console.log(itens);
+  }
+
+  function RemoverItem(){
+    if(contador > 0){
+      itens.pop();
+      setItens([...itens]);
+      setContador(contador-1);
+    }
+  }
 }
 
 function TelaGerenciarPedido() {
