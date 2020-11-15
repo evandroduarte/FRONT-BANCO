@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 
-import "../../styles.css";
+import "./styles.css";
 
 export default function TelaNovaDoacao() {
   const [contador, setContador] = useState(0);

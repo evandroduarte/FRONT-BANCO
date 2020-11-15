@@ -5,9 +5,9 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
+import "./styles.css";
+
 export default function TelaGerenciarDoacao() {
-  const [contador, setContador] = useState(0);
-  const [itens, setItens] = useState([1]);
 
   //variavel que receberá as informações do banco
   let dados_doacoes = [
@@ -17,107 +17,99 @@ export default function TelaGerenciarDoacao() {
       imagem: "",
       dataExpiracao: "13/11/2020",
       valor: 5,
+      itens: [{ descricao: "ração", quantidade: 30, tipo: "quilo" },{ descricao: "ração", quantidade: 30, tipo: "quilo" },{ descricao: "ração", quantidade: 30, tipo: "quilo" }],
+    },
+    {
+      descricao: "info",
+      urgencia: 1,
+      imagem: "",
+      dataExpiracao: "13/11/1996",
+      valor: 31,
       itens: [{ descricao: "ração", quantidade: 30, tipo: "quilo" }],
     },
+    {
+      descricao: "qualquer info",
+      urgencia: 2,
+      imagem: "",
+      dataExpiracao: "13/11/2020",
+      valor: 5,
+      itens: [{ descricao: "ração", quantidade: 30, tipo: "quilo" },{ descricao: "ração", quantidade: 30, tipo: "quilo" },{ descricao: "ração", quantidade: 30, tipo: "quilo" },{ descricao: "ração", quantidade: 30, tipo: "quilo" }],
+    },
   ];
+
+  const [controlador_modal, setControladorModal] = useState(true);
 
   return dados_doacoes.map(function (dado, index) {
     return (
       <>
         {/* Tela de Edição */}
-        <div className="modal">
+        <div className="modal" id={`modal${index}`}>
           <div className="modal-main">
             <div className="header-editar-doacao">
               <h2>Editar Doação</h2>
-              <div className="botao-fechar" onClick={fecharModal}>
+              <div className="botao-fechar" onClick={() => fecharModal(index)}>
                 <FontAwesomeIcon icon={faTimes} />
               </div>
             </div>
-            <div className="div-inputDado">
+            <div className="div-editarDado">
               <label htmlFor="edicao-descricao">Descrição</label>
-              <input type="text" id="edicao-descricao" />
+              <input type="text" id={`edicao-descricao${index}`} />
             </div>
 
-            <div className="div-inputDado">
+            <div className="div-editarDado">
               <label htmlFor="edicao-urgencia">Urgência</label>
-              <select name="edicao" id="edicao-urgencia">
+              <select name="edicao" id={`edicao-urgencia${index}`}>
                 <option value={1}>Tá suave</option>
                 <option value={2}>Tá precisando</option>
                 <option value={3}>Tá precisando urgente</option>
               </select>
             </div>
 
-            <div className="div-inputDado">
+            <div className="div-editarDado">
               <label htmlFor="edicao-imagem">Imagem</label>
-              <input type="file" id="edicao-imagem" />
+              <input
+                type="file"
+                id={`edicao-imagem${index}`}
+                style={{ background: "white", color: "black", width: "23rem" }}
+              />
             </div>
 
             <div className="div-linha-edicao">
-              <div className={"div-inputDado"}>
+              <div className={"div-editarDado"}>
                 <label htmlFor="edicao-data">Data de Expiração</label>
-                <input type="date" id="edicao-data" />
+                <input type="date" id={`edicao-data${index}`} />
               </div>
 
-              <div className="div-inputDado-valor">
+              <div className="div-editarDado" style={{ marginLeft: "50px" }}>
                 <label htmlFor="edicao-valor">Valor</label>
-                <input type="number" id="edicao-valor" min={0} />
+                <input
+                  type="number"
+                  style={{ padding: "7px", width: "12rem" }}
+                  id={`edicao-valor${index}`}
+                  min={0}
+                />
               </div>
             </div>
 
-            <div className="div-inputDado">
+            <div className="div-editarDado-tabela">
               <div className="linha">
                 <label htmlFor="edicao-valor">Itens Necessários</label>
                 <div className="sinais">
-                  <a
-                    className="sinal"
-                    onClick={() => {
-                      RemoverItem();
-                    }}
-                  >
+                  <a className="sinal" onClick={() => RemoverItem(index)}>
                     <FontAwesomeIcon icon={faMinus} />
                   </a>
-                  <a
-                    className="sinal"
-                    onClick={() => {
-                      AdicionarItem();
-                      setContador(contador + 1);
-                    }}
-                  >
+                  <a className="sinal" onClick={() => AdicionarItem(index)}>
                     <FontAwesomeIcon icon={faPlus} />
                   </a>
                 </div>
               </div>
-              <div className="div-inputItens">
-                {itens.map(function (_, index) {
-                  return (
-                    <div className="div-itens-edicao" key={index}>
-                      <input
-                        type="text"
-                        className={"input-descricao"}
-                        id={`descricao-item${index}`}
-                        placeholder="Descrição"
-                      />
-                      <input
-                        type="number"
-                        className={"input-quantidade"}
-                        id={`qtd-item${index}`}
-                        min={0}
-                        placeholder={"Qtd"}
-                      />
-                      <input
-                        type=""
-                        className={"input-tipo"}
-                        id={`tipo-item${index}`}
-                        placeholder={"Tipo Item"}
-                      />
-                    </div>
-                  );
-                })}
+              <div className="div-inputItens" id={`div-inputItens-edicao-${index}`}>
+                <div className="div-itens-edicao" id={`div-itens-edicao-${index}`} key={index}></div>
               </div>
             </div>
 
             <div className="div-salvar">
-              <a id="salvar-edicao" onClick={fecharModal}>
+              <a id="salvar-edicao" onClick={() => fecharModal(index)}>
                 Salvar Edição
               </a>
             </div>
@@ -159,9 +151,9 @@ export default function TelaGerenciarDoacao() {
             <div className="div-itens" key={index}>
               <table className="tabela-item">
                 <tr className="tabela-cabecalho">
-                  <th>Item</th>
-                  <th>Quantidade</th>
                   <th>Descrição</th>
+                  <th>Quantidade</th>
+                  <th>Tipo Item</th>
                 </tr>
                 {dado.itens.map(function (item, index) {
                   return (
@@ -182,7 +174,7 @@ export default function TelaGerenciarDoacao() {
                 <a id="excluir-doacao"> Excluir Doação </a>
               </div>
               <div className="div-salvar">
-                <a id="salvar-doacao" onClick={abrirModal}> Editar Doação </a>
+                <a id="salvar-doacao" onClick={() => abrirModal(index)}> Editar Doação </a>
               </div>
             </div>
         </div>
@@ -190,29 +182,109 @@ export default function TelaGerenciarDoacao() {
     );
   });
 
-  function abrirModal() {
-    document.querySelector(".modal").setAttribute("style", "display:block");
+  /**
+   * Abre o modal selecionado.
+   * @param {Number} index Número do modal.
+   */
+  function abrirModal(index) {
+    //tornando o modal visivel
+    document.querySelector(`#modal${index}`).setAttribute("style", "display:block");
+
+    //carregando valores para os inputs
+    document.querySelector(`#edicao-descricao${index}`).value = dados_doacoes[index].descricao;
+    document.querySelector(`#edicao-urgencia${index}`).value = dados_doacoes[index].urgencia;
+    let aux_data = dados_doacoes[index].dataExpiracao.split("/");
+    let data = `${aux_data[2]}-${aux_data[1]}-${aux_data[0]}`;
+    document.querySelector(`#edicao-data${index}`).value = data;
+    document.querySelector(`#edicao-valor${index}`).value = dados_doacoes[index].valor;
+    
+    //zerando tabela de itens
+    let div_pai = document.querySelector(`#div-inputItens-edicao-${index}`);
+    div_pai.innerHTML = "";
+
+    //inserindo itens na tabela
+    //cria o elemento html e depois insere o valor dentro do input
+    for(let aux = 0 ; aux < dados_doacoes[index].itens.length; aux++){
+      let div_linha = document.createElement("div");
+      div_linha.setAttribute("class","div-itens-edicao");
+      div_linha.setAttribute("id",`div-itens-edicao-${index}-${aux}`);
+
+      let input_descricao = document.createElement("input");
+      input_descricao.setAttribute("id",`descricao-item-${index}-${aux}`);
+      input_descricao.setAttribute("class","input-descricao");
+      
+      let input_qtd = document.createElement("input");
+      input_qtd.setAttribute("id",`qtd-item-${index}-${aux}`);
+      input_qtd.setAttribute("class","input-quantidade");
+      
+      let input_tipo = document.createElement("input");
+      input_tipo.setAttribute("id",`tipo-item-${index}-${aux}`);
+      input_tipo.setAttribute("class","input-tipo");
+      
+      div_linha.appendChild(input_descricao);
+      div_linha.appendChild(input_qtd);
+      div_linha.appendChild(input_tipo);
+      
+      div_pai.appendChild(div_linha);
+      
+      document.querySelector(`#descricao-item-${index}-${aux}`).value = dados_doacoes[index].itens[aux].descricao;
+      document.querySelector(`#qtd-item-${index}-${aux}`).value = dados_doacoes[index].itens[aux].quantidade;
+      document.querySelector(`#tipo-item-${index}-${aux}`).value = dados_doacoes[index].itens[aux].tipo;
+    }
   }
 
-  function fecharModal() {
-    document.querySelector(".modal").setAttribute("style", "display:none");
+  /**
+   * Fecha o modal aberto.
+   * @param {Number} index Indice do modal.
+   */
+  function fecharModal(index) {
+    document.querySelector(`#modal${index}`).setAttribute("style", "display:none");
   }
 
-  function AdicionarItem() {
-    let descricao = document.querySelector(`#descricao-item${contador}`).value;
-    let quantidade = document.querySelector(`#qtd-item${contador}`).value;
-    let tipo = document.querySelector(`#tipo-item${contador}`).value;
+  /**
+   * Adiciona uma nova linha aos itens de doação.
+   */
+  function AdicionarItem(index) {
+    const qtd_itens = document.querySelector(`#div-inputItens-edicao-${index}`).childElementCount;
+    
+    let div_pai = document.querySelector(`#div-inputItens-edicao-${index}`);
 
-    let itemNovo = { descricao: descricao, quantidade: quantidade, tipo: tipo };
+    let div_linha = document.createElement("div");
+    div_linha.setAttribute("class","div-itens-edicao");
+    div_linha.setAttribute("id",`div-itens-edicao-${index}-${qtd_itens}`);
+    
+    // adicionando inputs
+    let input_descricao = document.createElement("input");
+    input_descricao.setAttribute("id",`descricao-item-${index}-${qtd_itens}`);
+    input_descricao.setAttribute("class","input-descricao");
+    input_descricao.placeholder = "Descrição";
+    
+    let input_qtd = document.createElement("input");
+    input_qtd.setAttribute("id",`qtd-item-${index}-${qtd_itens}`);
+    input_qtd.setAttribute("class","input-quantidade");
+    input_qtd.placeholder = "Qtd";
 
-    setItens([(itens[contador] = itemNovo), ...itens]);
+    let input_tipo = document.createElement("input");
+    input_tipo.setAttribute("id",`tipo-item-${index}-${qtd_itens}`);
+    input_tipo.setAttribute("class","input-tipo");
+    input_tipo.placeholder = "Tipo";
+
+    div_linha.appendChild(input_descricao);
+    div_linha.appendChild(input_qtd);
+    div_linha.appendChild(input_tipo);
+
+    div_pai.appendChild(div_linha);
   }
 
-  function RemoverItem() {
-    if (contador > 0) {
-      itens.pop();
-      setItens([...itens]);
-      setContador(contador - 1);
+  /**
+   * Remove uma linha dos itens de doação.
+   */
+  function RemoverItem(index) {
+    const qtd_itens = document.querySelector(`#div-inputItens-edicao-${index}`).childElementCount-1;
+
+    if(qtd_itens >= 0){
+      let div_linha_remover = document.querySelector(`#div-itens-edicao-${index}-${qtd_itens}`);
+      div_linha_remover.remove();
     }
   }
 }

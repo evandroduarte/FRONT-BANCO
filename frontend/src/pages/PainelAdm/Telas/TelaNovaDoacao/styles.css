@@ -1,0 +1,105 @@
+.div-inputDado {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.div-salvar {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 5px;
+}
+
+.div-inputDado label {
+  font-size: 1.2rem;
+  text-align: justify;
+}
+
+.div-inputDado input {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  border-radius: 5px;
+  border-style: none;
+}
+
+.div-inputDado select {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  width: 100%;
+  border-radius: 5px;
+  border-style: none;
+  background-color: white;
+  font-size: 1.2rem;
+}
+
+.div-inputDado input:focus,
+select:focus {
+  background-color: #f4e3ff;
+}
+
+#salvar-doacao {
+  margin-left: auto;
+  margin-right: 0rem;
+  color: #463b88;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: White;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.3rem;
+}
+
+#salvar-doacao:hover {
+  color: White;
+  background-color: #7860ff;
+}
+
+#doacao-imagem {
+  padding: 0;
+}
+
+.div-itens {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5px;
+  margin-bottom: 10px;
+}
+
+.input-tipo {
+  width: 25%;
+  align-self: center;
+  margin: 0;
+}
+
+.input-descricao {
+  width: 60%;
+  align-self: center;
+  margin: 0;
+}
+
+.input-quantidade {
+  width: 10%;
+  align-self: center;
+  margin: 0;
+}
+
+.sinal {
+  font-size: large;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.linha {
+  display: flex;
+  flex-direction: row;
+}
+
+.sinais {
+  margin-left: auto;
+  margin-right: 5px;
+  display: flex;
+}

@@ -1,0 +1,269 @@
+.espacamento-inferior {
+  margin-bottom: 1rem;
+}
+
+.div-inputDado p {
+  font-size: 1.2rem;
+  text-align: justify;
+  display: contents;
+}
+
+.linha p {
+  display: contents;
+}
+
+.descricao-item {
+  margin-left: 5px;
+}
+
+.quantidade-item {
+  text-align: center;
+}
+
+.tipo-item {
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: white;
+  color: #463b88;
+}
+
+.botoes-linha {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#excluir-doacao {
+  margin-left: auto;
+  margin-right: 0rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: red;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.3rem;
+}
+
+.modal {
+  display: none;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  background: white;
+  width: 80%;
+  height: 95%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+#edicao-urgencia {
+  width: 12rem;
+}
+
+#edicao-data {
+  width: 12rem;
+}
+
+#salvar-edicao {
+  margin-left: auto;
+  margin-right: 0rem;
+  color: #463b88;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background-color: White;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.3rem;
+}
+
+#salvar-edicao:hover {
+  color: White;
+  background-color: #7860ff;
+}
+
+.div-inputItens {
+  height: 5rem;
+  overflow-y: auto;
+}
+
+.header-editar-doacao {
+  display: flex;
+  width: 100%;
+
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.75rem;
+
+  border-bottom-style: solid;
+  border-width: 2px;
+}
+
+.header-editar-doacao h2 {
+  font-size: 1.75rem;
+}
+
+.botao-fechar {
+  margin-left: auto;
+  margin-right: 5px;
+  color: red;
+  cursor: pointer;
+}
+
+.div-linha-edicao {
+  display: flex;
+}
+
+.div-inputDado-valor {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+  margin-left: 5rem;
+}
+
+.div-editarDado input {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  border-radius: 5px;
+  border-style: none;
+  font-size: 1rem;
+
+  background-color: #463b88;
+  color: white;
+}
+
+.div-editarDado input:focus {
+  box-shadow: 0 0 2px 1px #7860ff;
+  background-color: white;
+  color: black;
+}
+
+.div-editarDado label {
+  font-size: 1.2rem;
+  text-align: justify;
+}
+
+.espaco-esq {
+  margin-left: 2rem;
+}
+
+.div-editarDado{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+}
+
+.div-editarDado label {
+  font-size: 1.2rem;
+  text-align: justify;
+}
+
+.div-editarDado input {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  border-radius: 5px;
+  border-style: none;
+}
+
+.div-editarDado select {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  width: 15rem;
+  border-radius: 5px;
+  border-style: none;
+  background-color: #463b88;
+  color: white;
+  font-size: 1.2rem;
+}
+
+/* tabela itens */
+.div-itens-edicao {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5px;
+  margin-bottom: 10px;
+}
+
+.div-itens-edicao .input-tipo{
+  width: 25%;
+  align-self: center;
+  margin: 0;
+  color: white;
+}
+
+.div-itens-edicao .input-descricao {
+  width: 60%;
+  align-self: center;
+  margin: 0;
+  color: white;
+}
+
+.div-itens-edicao .input-quantidade {
+  width: 10%;
+  align-self: center;
+  margin: 0;
+  color: white;
+}
+
+.div-itens-edicao input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+}
+
+.div-editarDado-tabela input {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  border-radius: 5px;
+  border-style: none;
+  font-size: 1rem;
+
+  background-color: #463b88;
+  color: white;
+}
+
+.div-editarDado-tabela input:focus {
+  box-shadow: 0 0 2px 1px #7860ff;
+  background-color: white;
+  color: black;
+}
+
+.div-editarDado-tabela{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+    height: 15rem;
+}
+
+.div-editarDado-tabela .div-inputItens{
+  height: 7rem;
+}
