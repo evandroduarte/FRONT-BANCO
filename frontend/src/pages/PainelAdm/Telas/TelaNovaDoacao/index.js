@@ -21,11 +21,35 @@ export default function TelaNovaDoacao() {
   const [DR_money, setMoney] = useState('');
   const [DR_image, setImage] = useState('');
   const [DR_expiryDate, setExpiryDate] = useState('');
+  const[donation_id, setDonationId] = useState('')
 
   const history = useHistory();
 
   async function handleRegister(e){
     e.preventDefault();
+
+    try{
+      const form = document.forms[0];
+      var formData = new FormData(form);
+      /*for(var pair of formData.entries()) {
+        console.log(pair[0]+ ', '+ pair[1]); 
+     }*///Imprime as entradas e saides do formulario cadastrado;
+      const config = {
+        headers: { 'Authorization': `Bearer ${sessionStorage.getItem('ongToken')}`, 
+        'ong': `${sessionStorage.getItem('ongId')}`}
+      };
+      
+      const response = await api.post('donationrequest', formData, config)
+      .then((response) => {
+        setDonationId(response.data.DR_id);
+      });
+
+      alert(`Causa cadastrada com sucesso!`);
+      history.push('/paineladm');
+  }catch(err){
+      console.log(err);
+      alert(`Erro no cadastro`);
+  }
 
     //Criação do array de itens antes do salvamento do pedido
     let itens = [];
@@ -36,9 +60,9 @@ export default function TelaNovaDoacao() {
       let tipo = document.querySelector(`#tipo-item${aux}`).value;
   
       itens.push({
-        descricao: descricao,
-        quantidade: quantidade,
-        tipo: tipo,
+        item_description: descricao,
+        item_quantity: quantidade,
+        item_type: tipo,
       });
     }
 
@@ -50,24 +74,6 @@ export default function TelaNovaDoacao() {
       }
     }
 
-    try{
-        const form = document.forms[0];
-        var formData = new FormData(form);
-        
-        const response = await api.post('donationrequest', formData);
-
-        alert(`Causa cadastrada com sucesso!`);
-        console.log(response);
-        history.push('/paineladm');
-    }catch(err){
-        console.log(err);
-        alert(`Erro no cadastro, usuario já cadastrado,tente novamente`);
-    }
-
-
-}
-
-async function SalvarDoacao() {
 
 }
 
@@ -93,22 +99,23 @@ function RemoverItem() {
   return (
     <div className="card-centro">
       <h2 className="informacao-ong">Dados da Doação</h2>
+      <form className="form" id="form" name="form" onSubmit={handleRegister}>
       <div className="div-inputDado">
         <label htmlFor="doacao-descricao">Descrição</label>
         <input
           type="text"
-          id="doacao-descricao"
+          id="DR_description"
           placeholder="Descrição"
           required
           value={DR_description}
           onChange={(e) => setDescription(e.target.value)}
-          name="doacao-descricao"
+          name="DR_description"
         />
       </div>
 
       <div className="div-inputDado">
         <label htmlFor="doacao-urgencia">Urgência</label>
-        <select name="doacao" id="doacao-urgencia">
+        <select name="DR_urgency" id="DR_urgency" onChange={(e) => setUrgency(e.target.value)} value={DR_urgency}>
           <option value={1}>Tá suave</option>
           <option value={2}>Tá precisando</option>
           <option value={3}>Tá precisando urgente</option>
@@ -120,10 +127,9 @@ function RemoverItem() {
           <input
             type="file"
             accept="image/png, image/jpeg"
-            value={DR_image}
             onChange={(e) => setImage(e.target.files[0])}
-            name="doacao-imagem"
-            id="doacao-imagem"
+            name="DR_image"
+            id="DR_image"
           />
       </div>
 
@@ -131,10 +137,10 @@ function RemoverItem() {
         <label htmlFor="doacao-data">Data de Expiração</label>
         <input 
         type="date"
-        id="doacao-data"
+        id="DR_expiryDate"
         value = {DR_expiryDate}
         onChange={(e) => setExpiryDate(e.target.value)}
-        name = "doacao-data"
+        name = "DR_expiryDate"
         required
         />
       </div>
@@ -143,7 +149,8 @@ function RemoverItem() {
         <label htmlFor="doacao-valor">Valor</label>
         <input 
         type="number" 
-        id="doacao-valor"
+        id="DR_money"
+        name="DR_money"
         value = {DR_money}
         onChange={(e) => setMoney(e.target.value)} 
         />
@@ -198,12 +205,8 @@ function RemoverItem() {
           );
         })}
       </div>
-
-      <div className="div-salvar">
-        <a id="salvar-doacao" onClick={() => SalvarDoacao()}>
-          Salvar Doação
-        </a>
-      </div>
+      <button className="button" type="submit">Cadastrar</button>
+      </form>
     </div>
   );
 }
