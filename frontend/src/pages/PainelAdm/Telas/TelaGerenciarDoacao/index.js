@@ -7,7 +7,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles.css";
 
-export default function TelaGerenciarDoacao() {
+export default function TelaGerenciarDoacao(props) {
 
   //variavel que receberá as informações do banco
   let dados_doacoes = [

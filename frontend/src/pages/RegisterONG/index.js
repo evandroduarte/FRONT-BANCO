@@ -41,8 +41,6 @@ function RegisterONG(){
             console.log(err);
             alert(`Erro no cadastro, usuario já cadastrado,tente novamente`);
         }
-
-
     }
 
     return (
@@ -63,7 +61,7 @@ function RegisterONG(){
                     <form className="form" id="form" name="form" onSubmit={handleRegister}>
                         <h2>Preencha com os dados da ONG</h2>
                         <input
-                        pattern="[A-Za-z]" 
+                        //pattern="[a-zA-Z]+" 
                         placeholder="Nome da ONG" 
                         required
                         value={ong_name}
@@ -90,7 +88,7 @@ function RegisterONG(){
                         id="ong_street"
                         />
                         <input
-                        pattern="[0-9]" 
+                        //pattern="[0-9]+" 
                         className="input-num" 
                         placeholder="N°" 
                         required
@@ -100,7 +98,7 @@ function RegisterONG(){
                         id="ong_number"
                         />
                         <input
-                        pattern="[0-9]{8}" 
+                        //pattern="[0-9]{8}" 
                         className="input-cep" 
                         placeholder="CEP"
                         value={ong_cep}
@@ -109,7 +107,7 @@ function RegisterONG(){
                         id="ong_cep"
                         />
                         <input
-                        pattern="[A-Za-z]" 
+                        //pattern="[A-Za-z]*" 
                         className="input-city" 
                         placeholder="Cidade"
                         value={ong_city}
@@ -130,7 +128,7 @@ function RegisterONG(){
                         <input 
                         placeholder="Telefone (Whatsapp)" 
                         required type = "tel"
-                        pattern="[0-9]{11}" 
+                        //pattern="[0-9]{11}" 
                         value={ong_whatsapp}
                         onChange={ e => setWhatsapp(e.target.value)}
                         name="ong_whatsapp"
@@ -153,11 +151,11 @@ function RegisterONG(){
                         id="ong_password"
                         />
                         
-                        
                         <label className="custom-file-upload">
                             <input type="file" accept="image/png, image/jpeg" 
-                            value={ong_image}
-                            onChange={ e => setImage(e.target.files[0])} name="ong_image" id="ong_image"/>
+                            onChange={ e => setImage(e.target.files[0])} 
+                            name="ong_image" 
+                            id="ong_image"/>
                             <FiUpload size={48} color="#463B88" />
                             <h2>Selecione uma foto de perfil</h2>
                         </label>

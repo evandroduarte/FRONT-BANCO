@@ -28,7 +28,7 @@ function LoginONG(){
             sessionStorage.setItem('ongToken', response.data.ong_token);
             sessionStorage.setItem('ongId', response.data.ong_id);
 
-            history.push('/');
+            history.push('/paineladm');
         }catch(err){
             alert('Falha no login');
         }
