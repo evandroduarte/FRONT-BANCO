@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -34,6 +34,18 @@ export default function PainelAdm() {
       alert("Falha no carregamento das informações!");
     }
   };
+
+  /*useEffect(() => {
+    try {
+      await api.get("/ongs/profile/" + ong_id)
+      .then((response) => {
+        setResponseData(response.data);
+        console.log(response.data);
+      })
+    }catch (err) {
+      alert("Falha no carregamento das informações!");
+    }
+  },[])*/
 
   function GerenciarTelas(escolha) {
     switch (escolha) {

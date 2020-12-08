@@ -36,7 +36,7 @@ function RegisterONG(){
 
             alert(`Cadastro realizado com sucesso!`);
             console.log(response);
-            history.push('/loginuser');
+            history.push('/loginong');
         }catch(err){
             console.log(err);
             alert(`Erro no cadastro, usuario já cadastrado,tente novamente`);

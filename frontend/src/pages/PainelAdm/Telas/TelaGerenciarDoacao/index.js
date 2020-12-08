@@ -8,34 +8,10 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./styles.css";
 
 export default function TelaGerenciarDoacao(props) {
+  console.log(props.data);
 
   //variavel que receberá as informações do banco
-  let dados_doacoes = [
-    {
-      descricao: "qualquer info",
-      urgencia: 2,
-      imagem: "",
-      dataExpiracao: "13/11/2020",
-      valor: 5,
-      itens: [{ descricao: "ração", quantidade: 30, tipo: "quilo" },{ descricao: "ração", quantidade: 30, tipo: "quilo" },{ descricao: "ração", quantidade: 30, tipo: "quilo" }],
-    },
-    {
-      descricao: "info",
-      urgencia: 1,
-      imagem: "",
-      dataExpiracao: "13/11/1996",
-      valor: 31,
-      itens: [{ descricao: "ração", quantidade: 30, tipo: "quilo" }],
-    },
-    {
-      descricao: "qualquer info",
-      urgencia: 2,
-      imagem: "",
-      dataExpiracao: "13/11/2020",
-      valor: 5,
-      itens: [{ descricao: "ração", quantidade: 30, tipo: "quilo" },{ descricao: "ração", quantidade: 30, tipo: "quilo" },{ descricao: "ração", quantidade: 30, tipo: "quilo" },{ descricao: "ração", quantidade: 30, tipo: "quilo" }],
-    },
-  ];
+  let dados_doacoes = props.data;
 
   const [controlador_modal, setControladorModal] = useState(true);
 
@@ -121,30 +97,30 @@ export default function TelaGerenciarDoacao(props) {
           <h2 className="informacao-ong">Doação Cadastrada</h2>
           <div className="div-inputDado">
             <p>Descrição: </p>
-            <p>{dado.descricao}</p>
+            <p>{dado.DR_description}</p>
           </div>
 
           <div className="div-inputDado">
             <p>Urgência: </p>
-            <p>{dado.urgencia}</p>
+            <p>{dado.DR_urgency}</p>
           </div>
 
-          <div className="div-inputDado">
+          {/* <div className="div-inputDado">
             <p>Imagem: </p>
-            <p>{dado.imagem}</p>
-          </div>
+            <p>{dado}</p>
+          </div> */}
 
           <div className="div-inputDado">
             <p>Data de Expiração: </p>
-            <p>{dado.dataExpiracao}</p>
+            <p>{dado.DR_expiryDate}</p>
           </div>
 
           <div className="div-inputDado">
             <p>Valor: </p>
-            <p>{dado.valor}</p>
+            <p>{dado.DR_money}</p>
           </div>
 
-          <div className="div-inputDado">
+          {/* <div className="div-inputDado">
             <div className="linha">
               <p>Itens Necessários</p>
             </div>
@@ -158,20 +134,20 @@ export default function TelaGerenciarDoacao(props) {
                 {dado.itens.map(function (item, index) {
                   return (
                     <tr>
-                      <th>{item.descricao}</th>
-                      <th>{item.quantidade}</th>
-                      <th>{item.tipo}</th>
+                      <th>{item.item_description}</th>
+                      <th>{item.item_quantity}</th>
+                      <th>{item.item_type}</th>
                     </tr>
                   );
                 })}
               </table>
             </div>
-          </div>
+          </div> */}
 
           {/* prettier-ignore */}
           <div className="botoes-linha">
               <div className="div-salvar">
-                <a id="excluir-doacao"> Excluir Doação </a>
+                <a id="excluir-doacao" onClick={() => console.log(dado.DR_id)}> Excluir Doação </a>
               </div>
               <div className="div-salvar">
                 <a id="salvar-doacao" onClick={() => abrirModal(index)}> Editar Doação </a>
