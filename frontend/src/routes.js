@@ -12,15 +12,14 @@ import DashboardOng from './pages/DashboardOng';
 import RegisterCausa from './pages/RegisterCausa';
 import CardAnimal from './pages/CardAnimal';
 import CardCausa from './pages/CardCausa';
-
 import PainelAdm from './pages/PainelAdm';
 
 export default function Routes(){
     return(
         <BrowserRouter>
             <Switch>
-            <Route path="/" component={PainelAdm}/>
-            {/* <Route path="/" exact component={Home} />
+            <Route path="/paineladm" component={PainelAdm}/>
+            <Route path="/" exact component={Home} />
             <Route path="/loginong" component={LoginONG} />
             <Route path="/loginuser" component={LoginUser} />
             <Route path="/registerong" component={RegisterONG} />
@@ -30,7 +29,7 @@ export default function Routes(){
             <Route path="/dashboardong" component={DashboardOng} />
             <Route path="/registercausa" component={RegisterCausa} />
             <Route path="/cardanimal" component={CardAnimal} />
-            <Route path="/cardcausa" component={CardCausa} /> */}
+            <Route path="/cardcausa" component={CardCausa} /> 
             </Switch>
         </BrowserRouter>
     )

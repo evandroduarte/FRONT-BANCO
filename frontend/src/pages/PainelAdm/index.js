@@ -9,43 +9,70 @@ import TelaHome from "./Telas/TelaHome";
 import TelaNovaDoacao from "./Telas/TelaNovaDoacao";
 import TelaGerenciarDoacao from "./Telas/TelaGerenciarDoacao";
 
+import api from '../../services/api';
+
+
 import "./styles.css";
+
 
 export default function PainelAdm() {
   const [seletorTela, setSeletor] = useState(3);
+  const [responseData, setResponseData] = useState([{ }]);
+
+  //Traz as informações da ong no momento em que a pagina é carregada.
+  window.onload = async function getOng(e){
+    e.preventDefault();
+
+    const ong_id = sessionStorage.getItem("ongId");
+
+    try {
+      await api.get("/ongs/profile/" + ong_id)
+      .then((response) => {
+        setResponseData(response.data);
+      })
+    }catch (err) {
+      alert("Falha no carregamento das informações!");
+    }
+  };
+
+  function GerenciarTelas(escolha) {
+    switch (escolha) {
+      case 0:
+        return <TelaHome data={responseData[0].ong_description}/>;
+      case 1:
+        return <TelaNovaDoacao />;
+      case 3:
+        return <TelaGerenciarDoacao data={responseData}/>;
+    }
+  };
 
   return (
     <div className="container">
       <div className="col-esq">
         <a className="botoes-col-esq" onClick={() => setSeletor(0)}>
-          <div className="div-icone"><FontAwesomeIcon icon={faHome} /></div>
+          <div className="div-icone">
+            <FontAwesomeIcon icon={faHome} />
+          </div>
           <div className="div-texto">Home</div>
         </a>
         <a className="botoes-col-esq" onClick={() => setSeletor(1)}>
-          <div className="div-icone"><FontAwesomeIcon icon={faPrayingHands} /></div>
+          <div className="div-icone">
+            <FontAwesomeIcon icon={faPrayingHands} />
+          </div>
           <div className="div-texto">Nova Doação</div>
         </a>
         <a className="botoes-col-esq" onClick={() => setSeletor(3)}>
-          <div className="div-icone"><FontAwesomeIcon icon={faClipboardCheck} /></div>
+          <div className="div-icone">
+            <FontAwesomeIcon icon={faClipboardCheck} />
+          </div>
           <div className="div-texto">Gerenciar Doações</div>
         </a>
       </div>
       <div className="col-centro">
-        <h1 className="nome-ong">🐾 Nome da Ong</h1>
+        <h1 className="nome-ong">{responseData[0].ong_name}</h1>
         {GerenciarTelas(seletorTela)}
         <div id={"div-modal"}></div>
       </div>
     </div>
   );
-}
-
-function GerenciarTelas(escolha) {
-  switch (escolha) {
-    case 0:
-      return <TelaHome />;
-    case 1:
-      return <TelaNovaDoacao />;
-    case 3:
-      return <TelaGerenciarDoacao />;
-  }
 }
