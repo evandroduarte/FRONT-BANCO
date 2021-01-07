@@ -39,8 +39,6 @@ export default function TelaNovaDoacao() {
       
       await api.post('donationrequest', formData, config)
       .then((response) => {
-        console.log(response.data);
-        console.log(donation_id);
         let itens = [];
 
         for (let aux = 0; aux < contador + 1; aux++) {
@@ -61,7 +59,7 @@ export default function TelaNovaDoacao() {
             {item_description: itens[aux].item_description,
             item_quantity: itens[aux].item_quantity,
             item_type: itens[aux].item_type,
-            donation_id: donation_id}
+            donation_id: response.data[0]}
             ,config)
           }catch(err){
             console.log(err);
