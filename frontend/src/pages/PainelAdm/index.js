@@ -18,9 +18,10 @@ import "./styles.css";
 export default function PainelAdm() {
   const [seletorTela, setSeletor] = useState(3);
   const [responseData, setResponseData] = useState([{ }]);
+  const [isLoading, setLoading] = useState(true);
 
   //Traz as informações da ong no momento em que a pagina é carregada.
-  window.onload = async function getOng(e){
+  /*window.onload = async function getOng(e){
     e.preventDefault();
 
     const ong_id = sessionStorage.getItem("ongId");
@@ -33,19 +34,27 @@ export default function PainelAdm() {
     }catch (err) {
       alert("Falha no carregamento das informações!");
     }
-  };
+  };*/
 
-  /*useEffect(() => {
+  const ong_id = sessionStorage.getItem("ongId");
+
+  useEffect(() => {
     try {
-      await api.get("/ongs/profile/" + ong_id)
+      api.get("/ongs/profile/" + ong_id)
       .then((response) => {
-        setResponseData(response.data);
+        setResponseData(response.data)
+        setLoading(false);
+        ;
         console.log(response.data);
       })
     }catch (err) {
       alert("Falha no carregamento das informações!");
     }
-  },[])*/
+  },[])
+
+  if(isLoading){
+    return <div>Loading...</div>
+  }
 
   function GerenciarTelas(escolha) {
     switch (escolha) {

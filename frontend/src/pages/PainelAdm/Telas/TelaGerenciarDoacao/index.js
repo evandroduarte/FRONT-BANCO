@@ -6,6 +6,7 @@ import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles.css";
+import api from "../../../../services/api";
 
 export default function TelaGerenciarDoacao(props) {
   console.log(props.data);
@@ -112,7 +113,7 @@ export default function TelaGerenciarDoacao(props) {
 
           <div className="div-inputDado">
             <p>Data de Expiração: </p>
-            <p>{dado.DR_expiryDate}</p>
+            <p>{formatDate(dado.DR_expiryDate)}</p>
           </div>
 
           <div className="div-inputDado">
@@ -147,7 +148,7 @@ export default function TelaGerenciarDoacao(props) {
           {/* prettier-ignore */}
           <div className="botoes-linha">
               <div className="div-salvar">
-                <a id="excluir-doacao" onClick={() => console.log(dado.DR_id)}> Excluir Doação </a>
+                <a id="excluir-doacao" onClick={() => DeletarDoacao(dado.DR_id)}> Excluir Doação </a>
               </div>
               <div className="div-salvar">
                 <a id="salvar-doacao" onClick={() => abrirModal(index)}> Editar Doação </a>
@@ -263,4 +264,31 @@ export default function TelaGerenciarDoacao(props) {
       div_linha_remover.remove();
     }
   }
+
+  async function DeletarDoacao(DR_id){
+    const config = {
+      headers: { 'Authorization': `Bearer ${sessionStorage.getItem('ongToken')}`, 
+      'ong': `${sessionStorage.getItem('ongId')}`}
+    };
+  
+    try{
+    await api.delete('/donationrequest/' + DR_id, config)
+    .then(window.location.reload());
+    }catch(err){
+      console.log(err);
+    }
+  }
+  
+  function formatDate (input) {
+    if(input){
+      var datePart = input.match(/\d+/g),
+      year = datePart[0].substring(2), // get only two digits
+      month = datePart[1], day = datePart[2];
+    
+      return day+'/'+month+'/'+year;
+    }else{
+      return
+    }
+  }
 }
+

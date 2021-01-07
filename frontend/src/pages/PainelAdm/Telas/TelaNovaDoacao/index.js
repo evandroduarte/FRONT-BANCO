@@ -28,31 +28,58 @@ export default function TelaNovaDoacao() {
   async function handleRegister(e){
     e.preventDefault();
 
+    const config = {
+      headers: { 'Authorization': `Bearer ${sessionStorage.getItem('ongToken')}`, 
+      'ong': `${sessionStorage.getItem('ongId')}`}
+    };
+
     try{
       const form = document.forms[0];
       var formData = new FormData(form);
-      /*for(var pair of formData.entries()) {
-        console.log(pair[0]+ ', '+ pair[1]); 
-     }*///Imprime as entradas e saides do formulario cadastrado;
-      const config = {
-        headers: { 'Authorization': `Bearer ${sessionStorage.getItem('ongToken')}`, 
-        'ong': `${sessionStorage.getItem('ongId')}`}
-      };
       
-      const response = await api.post('donationrequest', formData, config)
+      await api.post('donationrequest', formData, config)
       .then((response) => {
-        setDonationId(response.data.DR_id);
+        console.log(response.data);
+        console.log(donation_id);
+        let itens = [];
+
+        for (let aux = 0; aux < contador + 1; aux++) {
+          let descricao = document.querySelector(`#descricao-item${aux}`).value;
+          let quantidade = document.querySelector(`#qtd-item${aux}`).value;
+          let tipo = document.querySelector(`#tipo-item${aux}`).value;
+      
+          itens.push({
+            item_description: descricao,
+            item_quantity: quantidade,
+            item_type: tipo,
+          });
+        }
+    
+        for (let aux = 0; aux < contador + 1; aux++) {
+          try{
+            api.post('items',         
+            {item_description: itens[aux].item_description,
+            item_quantity: itens[aux].item_quantity,
+            item_type: itens[aux].item_type,
+            donation_id: donation_id}
+            ,config)
+          }catch(err){
+            console.log(err);
+            alert(`Erro no cadastro`);
+          }
+        }
+    
       });
 
-      alert(`Causa cadastrada com sucesso!`);
-      history.push('/paineladm');
+      //alert(`Causa cadastrada com sucesso!`);
+      //window.location.reload();
   }catch(err){
       console.log(err);
       alert(`Erro no cadastro`);
   }
 
     //Criação do array de itens antes do salvamento do pedido
-    let itens = [];
+    /*let itens = [];
 
     for (let aux = 0; aux < contador + 1; aux++) {
       let descricao = document.querySelector(`#descricao-item${aux}`).value;
@@ -68,11 +95,16 @@ export default function TelaNovaDoacao() {
 
     for (let aux = 0; aux < contador + 1; aux++) {
       try{
-        
-      }catch{
-
+        api.post('items',         
+        {item_description: itens[aux].item_description,
+        item_quantity: itens[aux].item_quantity,
+        item_type: itens[aux].item_type}
+        ,config)
+      }catch(err){
+        console.log(err);
+        alert(`Erro no cadastro`);
       }
-    }
+    }*/
 
 
 }
