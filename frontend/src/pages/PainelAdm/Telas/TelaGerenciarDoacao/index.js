@@ -10,9 +10,9 @@ import api from "../../../../services/api";
 
 export default function TelaGerenciarDoacao(props) {
   //variavel que receberá as informações do banco
-  let dados_doacoes = props.data;
+  const [dados_doacoes, setDoacoes] = useState(props.data);
 
-  console.log(dados_doacoes.length);
+  // let dados_doacoes = props.data;
 
   return dados_doacoes.length == 0 ?   //se a doacao for vazia nao retorna nada.
     <div className="card-centro espacamento-inferior">
@@ -50,7 +50,7 @@ export default function TelaGerenciarDoacao(props) {
 
               <div className="div-editarDado">
                 <label htmlFor="edicao-imagem">Imagem</label>
-                <input
+                <input 
                   type="file"
                   id={`edicao-imagem${index}`}
                   style={{
@@ -138,34 +138,10 @@ export default function TelaGerenciarDoacao(props) {
               <p>{dado.DR_money}</p>
             </div>
 
-            {/* <div className="div-inputDado">
-            <div className="linha">
-              <p>Itens Necessários</p>
-            </div>
-            <div className="div-itens" key={index}>
-              <table className="tabela-item">
-                <tr className="tabela-cabecalho">
-                  <th>Descrição</th>
-                  <th>Quantidade</th>
-                  <th>Tipo Item</th>
-                </tr>
-                {dado.itens.map(function (item, index) {
-                  return (
-                    <tr>
-                      <th>{item.item_description}</th>
-                      <th>{item.item_quantity}</th>
-                      <th>{item.item_type}</th>
-                    </tr>
-                  );
-                })}
-              </table>
-            </div>
-          </div> */}
-
             {/* prettier-ignore */}
             <div className="botoes-linha">
               <div className="div-salvar">
-                <a id="excluir-doacao" onClick={() => DeletarDoacao(dado.DR_id)}> Excluir Doação </a>
+                <a id="excluir-doacao" onClick={() => DeletarDoacao(dado.DR_id, index)}> Excluir Doação </a>
               </div>
               <div className="div-salvar">
                 <a id="salvar-doacao" onClick={() => abrirModal(index)}> Editar Doação </a>
@@ -298,7 +274,15 @@ export default function TelaGerenciarDoacao(props) {
     }
   }
 
-  async function DeletarDoacao(DR_id) {
+  async function DeletarDoacao(DR_id, indexNoArray) {
+    let aux_remover_item = dados_doacoes;
+    console.log(aux_remover_item);
+
+    aux_remover_item.splice(indexNoArray,1);
+    console.log(aux_remover_item);
+
+    setDoacoes([...aux_remover_item]);
+
     const config = {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("ongToken")}`,
@@ -309,7 +293,7 @@ export default function TelaGerenciarDoacao(props) {
     try {
       await api
         .delete("/donationrequest/" + DR_id, config)
-        .then(window.location.reload());
+        // .then(window.location.reload());
     } catch (err) {
       console.log(err);
     }
