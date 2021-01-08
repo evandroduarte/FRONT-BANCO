@@ -12,9 +12,9 @@ export default function TelaGerenciarDoacao(props) {
   //variavel que receberá as informações do banco
   const [dados_doacoes, setDoacoes] = useState(props.data);
 
-  // let dados_doacoes = props.data;
+  console.log(props.data);
 
-  return dados_doacoes.length == 0 ?   //se a doacao for vazia nao retorna nada.
+  return dados_doacoes.length == 1 ?   //se a doacao for vazia nao retorna nada.
     <div className="card-centro espacamento-inferior">
       <h2>Nenhuma doação cadastrada.</h2>
     </div>
