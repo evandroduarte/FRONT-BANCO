@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { faPrayingHands } from "@fortawesome/free-solid-svg-icons";
 import { faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+
 
 import TelaHome from "./Telas/TelaHome";
 import TelaNovaDoacao from "./Telas/TelaNovaDoacao";
@@ -16,25 +18,9 @@ import "./styles.css";
 
 
 export default function PainelAdm() {
-  const [seletorTela, setSeletor] = useState(3);
+  const [seletorTela, setSeletor] = useState(0);
   const [responseData, setResponseData] = useState([{ }]);
   const [isLoading, setLoading] = useState(true);
-
-  //Traz as informações da ong no momento em que a pagina é carregada.
-  /*window.onload = async function getOng(e){
-    e.preventDefault();
-
-    const ong_id = sessionStorage.getItem("ongId");
-
-    try {
-      await api.get("/ongs/profile/" + ong_id)
-      .then((response) => {
-        setResponseData(response.data);
-      })
-    }catch (err) {
-      alert("Falha no carregamento das informações!");
-    }
-  };*/
 
   const ong_id = sessionStorage.getItem("ongId");
 
@@ -44,8 +30,8 @@ export default function PainelAdm() {
       .then((response) => {
         setResponseData(response.data)
         setLoading(false);
-        ;
-        console.log(response.data);
+
+        console.log(response.data)
       })
     }catch (err) {
       alert("Falha no carregamento das informações!");
@@ -88,9 +74,19 @@ export default function PainelAdm() {
           </div>
           <div className="div-texto">Gerenciar Doações</div>
         </a>
+
+        <a className="botoes-col-esq-sair" onClick={() => setSeletor(3)}>
+          <div className="div-icone">
+            <FontAwesomeIcon icon={faSignOutAlt} />
+          </div>
+          <div className="div-texto">Sair</div>
+        </a>
       </div>
       <div className="col-centro">
-        <h1 className="nome-ong">{responseData[0].ong_name}</h1>
+        <div className="div-titulo-ong">
+          <img src={(responseData[0].ong_image).replace('uploads', 'http://localhost:3333')} className="imagem-ong"></img>
+          <h1 className="nome-ong">{responseData[0].ong_name}</h1>
+        </div>
         {GerenciarTelas(seletorTela)}
         <div id={"div-modal"}></div>
       </div>

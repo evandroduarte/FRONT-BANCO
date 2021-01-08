@@ -235,7 +235,9 @@ function RemoverItem() {
           );
         })}
       </div>
-      <button className="button" type="submit">Cadastrar</button>
+      <div className="div-botao-cadastrardoacao">
+        <button className="button" type="submit">Cadastrar</button>
+      </div>
       </form>
     </div>
   );
