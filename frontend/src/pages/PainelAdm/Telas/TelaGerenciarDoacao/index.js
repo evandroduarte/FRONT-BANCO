@@ -307,9 +307,10 @@ export default function TelaGerenciarDoacao(props) {
     };
 
     try {
-      await api
-        .delete("/donationrequest/" + DR_id, config)
-        .then(window.location.reload());
+      await api.delete('/items/' + DR_id, config)
+      .then(() => {
+       api.delete("/donationrequest/" + DR_id, config)
+      .then(window.location.reload())})
     } catch (err) {
       console.log(err);
     }
