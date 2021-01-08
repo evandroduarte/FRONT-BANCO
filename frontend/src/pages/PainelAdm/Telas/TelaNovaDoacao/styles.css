@@ -127,3 +127,11 @@ select:focus {
   background-color: #65ff11;
   color: white
 }
+
+.input-imagem{
+  color: white;
+  font-weight: 600;
+
+  text-align: center;
+  cursor: pointer;
+}

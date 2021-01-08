@@ -99,10 +99,15 @@ html {
   flex-direction: column;
 
   width: 85%;
+
+  background-image: url("../../assets/logo_semfundo_cinza.png");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
 }
 
 .card-centro {
   background-color: #463b88;
+  opacity: 0.95;
   border-radius: 1rem;
   padding: 1.2rem;
 
@@ -112,8 +117,8 @@ html {
 .col-centro .nome-ong {
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 2.5rem;
-
+  font-size: 3rem;
+  color: #463b88;
   /* border-bottom-style: solid; */
 }
 

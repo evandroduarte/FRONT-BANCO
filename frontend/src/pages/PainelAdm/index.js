@@ -15,12 +15,14 @@ import api from '../../services/api';
 
 
 import "./styles.css";
+import { useHistory } from "react-router-dom";
 
 
 export default function PainelAdm() {
   const [seletorTela, setSeletor] = useState(0);
   const [responseData, setResponseData] = useState([{ }]);
   const [isLoading, setLoading] = useState(true);
+  const history = useHistory();
 
   const ong_id = sessionStorage.getItem("ongId");
 
@@ -75,7 +77,7 @@ export default function PainelAdm() {
           <div className="div-texto">Gerenciar Doações</div>
         </a>
 
-        <a className="botoes-col-esq-sair" onClick={() => setSeletor(3)}>
+        <a className="botoes-col-esq-sair" onClick={() => handleLogout()}>
           <div className="div-icone">
             <FontAwesomeIcon icon={faSignOutAlt} />
           </div>
@@ -92,4 +94,11 @@ export default function PainelAdm() {
       </div>
     </div>
   );
+
+  function handleLogout() {
+    localStorage.clear();
+
+    history.push('/');
+  }
+
 }

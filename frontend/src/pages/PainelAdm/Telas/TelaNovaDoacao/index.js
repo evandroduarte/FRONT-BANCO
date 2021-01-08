@@ -27,7 +27,7 @@ export default function TelaNovaDoacao() {
 
   async function handleRegister(e){
     e.preventDefault();
-
+    console.log("enviando dados.")
     const config = {
       headers: { 'Authorization': `Bearer ${sessionStorage.getItem('ongToken')}`, 
       'ong': `${sessionStorage.getItem('ongId')}`}
@@ -130,114 +130,115 @@ function RemoverItem() {
     <div className="card-centro">
       <h2 className="informacao-ong">Dados da Doação</h2>
       <form className="form" id="form" name="form" onSubmit={handleRegister}>
-      <div className="div-inputDado">
-        <label htmlFor="doacao-descricao">Descrição</label>
-        <input
-          type="text"
-          id="DR_description"
-          placeholder="Descrição"
-          required
-          value={DR_description}
-          onChange={(e) => setDescription(e.target.value)}
-          name="DR_description"
-        />
-      </div>
-
-      <div className="div-inputDado">
-        <label htmlFor="doacao-urgencia">Urgência</label>
-        <select name="DR_urgency" id="DR_urgency" onChange={(e) => setUrgency(e.target.value)} value={DR_urgency}>
-          <option value={1}>Tá suave</option>
-          <option value={2}>Tá precisando</option>
-          <option value={3}>Tá precisando urgente</option>
-        </select>
-      </div>
-
-      <div className="div-inputDado">
-        <label htmlFor="doacao-imagem">Imagem</label>
+        <div className="div-inputDado">
+          <label htmlFor="doacao-descricao">Descrição</label>
           <input
-            type="file"
-            accept="image/png, image/jpeg"
-            onChange={(e) => setImage(e.target.files[0])}
-            name="DR_image"
-            id="DR_image"
+            type="text"
+            id="DR_description"
+            placeholder="Descrição"
+            required
+            value={DR_description}
+            onChange={(e) => setDescription(e.target.value)}
+            name="DR_description"
           />
-      </div>
-
-      <div className="div-inputDado">
-        <label htmlFor="doacao-data">Data de Expiração</label>
-        <input 
-        type="date"
-        id="DR_expiryDate"
-        value = {DR_expiryDate}
-        onChange={(e) => setExpiryDate(e.target.value)}
-        name = "DR_expiryDate"
-        required
-        />
-      </div>
-
-      <div className="div-inputDado">
-        <label htmlFor="doacao-valor">Valor</label>
-        <input 
-        type="number" 
-        id="DR_money"
-        name="DR_money"
-        value = {DR_money}
-        onChange={(e) => setMoney(e.target.value)} 
-        />
-      </div>
-
-      <div className="div-inputDado">
-        <div className="linha">
-          <label htmlFor="doacao-valor">Itens Necessários</label>
-          <div className="sinais">
-            <a
-              className="sinal"
-              onClick={() => {
-                RemoverItem();
-              }}
-            >
-              <FontAwesomeIcon icon={faMinus} />
-            </a>
-            <a
-              className="sinal"
-              onClick={() => {
-                AdicionarItem();
-                setContador(contador + 1);
-              }}
-            >
-              <FontAwesomeIcon icon={faPlus} />
-            </a>
-          </div>
         </div>
-        {itens.map(function (_, index) {
-          return (
-            <div className="div-itens" key={index}>
-              <input
-                type="text"
-                className={"input-descricao"}
-                id={`descricao-item${index}`}
-                placeholder="Descrição"
-              />
-              <input
-                type="number"
-                className={"input-quantidade"}
-                id={`qtd-item${index}`}
-                min={0}
-                placeholder={"Qtd"}
-              />
-              <input
-                type=""
-                className={"input-tipo"}
-                id={`tipo-item${index}`}
-                placeholder={"Tipo Item"}
-              />
+
+        <div className="div-inputDado">
+          <label htmlFor="doacao-urgencia">Urgência</label>
+          <select name="DR_urgency" id="DR_urgency" onChange={(e) => setUrgency(e.target.value)} value={DR_urgency}>
+            <option value={1}>Tá suave</option>
+            <option value={2}>Tá precisando</option>
+            <option value={3}>Tá precisando urgente</option>
+          </select>
+        </div>
+
+        <div className="div-inputDado">
+          <label htmlFor="DR_image" className="label-imagem">Imagem</label>
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              className="input-imagem"
+              onChange={(e) => setImage(e.target.files[0])}
+              name="DR_image"
+              id="DR_image"
+            />
+        </div>
+
+        <div className="div-inputDado">
+          <label htmlFor="doacao-data">Data de Expiração</label>
+          <input 
+          type="date"
+          id="DR_expiryDate"
+          value = {DR_expiryDate}
+          onChange={(e) => setExpiryDate(e.target.value)}
+          name = "DR_expiryDate"
+          required
+          />
+        </div>
+
+        <div className="div-inputDado">
+          <label htmlFor="doacao-valor">Valor</label>
+          <input 
+          type="number" 
+          id="DR_money"
+          name="DR_money"
+          value = {DR_money}
+          onChange={(e) => setMoney(e.target.value)} 
+          />
+        </div>
+
+        <div className="div-inputDado">
+          <div className="linha">
+            <label htmlFor="doacao-valor">Itens Necessários</label>
+            <div className="sinais">
+              <a
+                className="sinal"
+                onClick={() => {
+                  RemoverItem();
+                }}
+              >
+                <FontAwesomeIcon icon={faMinus} />
+              </a>
+              <a
+                className="sinal"
+                onClick={() => {
+                  AdicionarItem();
+                  setContador(contador + 1);
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </a>
             </div>
-          );
-        })}
-      </div>
-      <div className="div-botao-cadastrardoacao">
-        <button className="button" type="submit">Cadastrar</button>
-      </div>
+          </div>
+          {itens.map(function (_, index) {
+            return (
+              <div className="div-itens" key={index}>
+                <input
+                  type="text"
+                  className={"input-descricao"}
+                  id={`descricao-item${index}`}
+                  placeholder="Descrição"
+                />
+                <input
+                  type="number"
+                  className={"input-quantidade"}
+                  id={`qtd-item${index}`}
+                  min={0}
+                  placeholder={"Qtd"}
+                />
+                <input
+                  type=""
+                  className={"input-tipo"}
+                  id={`tipo-item${index}`}
+                  placeholder={"Tipo Item"}
+                />
+              </div>
+            );
+          })}
+        </div>
+        <div className="div-botao-cadastrardoacao">
+          <button className="button" type="submit">Cadastrar</button>
+        </div>
       </form>
     </div>
   );
