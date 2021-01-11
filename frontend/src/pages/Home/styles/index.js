@@ -28,7 +28,7 @@ export const Content = styled.div`
     justify-content: space-between;
   }
   button {
-    width: 40%;
+    width: 200px;
     height: 50px;
     margin-top: 10px;
     background: #453c8a;
