@@ -1,3 +1,13 @@
+.div-expiracao-valor{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.div-expiracao-valor .div-inputDado{
+  width: 48%;
+}
+
 .div-inputDado {
   display: flex;
   flex-direction: column;
@@ -20,6 +30,7 @@
   padding: 0.3rem 0 0.3rem 0.3rem;
   border-radius: 5px;
   border-style: none;
+  height: 35px;
 }
 
 .div-inputDado select {
@@ -35,6 +46,10 @@
 .div-inputDado input:focus,
 select:focus {
   background-color: #f4e3ff;
+}
+
+.div-inputDado .input-imagem:focus{
+  background-color: #563b88;
 }
 
 #salvar-doacao {
@@ -124,14 +139,24 @@ select:focus {
 }
 
 .button:hover{
-  background-color: #65ff11;
+  background-color: #7d0eb1;
   color: white
 }
 
 .input-imagem{
   color: white;
   font-weight: 600;
-
   text-align: center;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px){
+  .div-expiracao-valor{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .div-expiracao-valor .div-inputDado{
+    width: 100%;
+  }
 }

@@ -6,17 +6,14 @@ import { faPrayingHands } from "@fortawesome/free-solid-svg-icons";
 import { faClipboardCheck } from "@fortawesome/free-solid-svg-icons";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
-
 import TelaHome from "./Telas/TelaHome";
 import TelaNovaDoacao from "./Telas/TelaNovaDoacao";
 import TelaGerenciarDoacao from "./Telas/TelaGerenciarDoacao";
 
 import api from '../../services/api';
 
-
 import "./styles.css";
 import { useHistory } from "react-router-dom";
-
 
 export default function PainelAdm() {
   const [seletorTela, setSeletor] = useState(0);
@@ -47,7 +44,7 @@ export default function PainelAdm() {
   function GerenciarTelas(escolha) {
     switch (escolha) {
       case 0:
-        return <TelaHome data={responseData[0].ong_description}/>;
+        return <TelaHome data={responseData[0]?.ong_description}/>;
       case 1:
         return <TelaNovaDoacao />;
       case 3:
@@ -86,8 +83,8 @@ export default function PainelAdm() {
       </div>
       <div className="col-centro">
         <div className="div-titulo-ong">
-          <img src={(responseData[0].ong_image).replace('uploads', 'http://localhost:3333')} className="imagem-ong"></img>
-          <h1 className="nome-ong">{responseData[0].ong_name}</h1>
+          <img src={(responseData[0]?.ong_image).replace('uploads', 'http://localhost:3333')} className="imagem-ong"></img>
+          <h1 className="nome-ong">{responseData[0]?.ong_name}</h1>
         </div>
         {GerenciarTelas(seletorTela)}
         <div id={"div-modal"}></div>

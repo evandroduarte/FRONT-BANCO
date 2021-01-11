@@ -163,16 +163,18 @@ export default function TelaGerenciarDoacao(props) {
       .querySelector(`#modal${index}`)
       .setAttribute("style", "display:block");
 
+    console.log(dados_doacoes);
+
     //carregando valores para os inputs
     document.querySelector(`#edicao-descricao${index}`).value =
-      dados_doacoes[index].descricao;
+      dados_doacoes[index].DR_description;
     document.querySelector(`#edicao-urgencia${index}`).value =
-      dados_doacoes[index].urgencia;
-    let aux_data = dados_doacoes[index].dataExpiracao.split("/");
-    let data = `${aux_data[2]}-${aux_data[1]}-${aux_data[0]}`;
-    document.querySelector(`#edicao-data${index}`).value = data;
+      dados_doacoes[index].DR_urgency;
+    let aux_data = dados_doacoes[index].DR_expiryDate //.split("/");
+    // let data = `${aux_data[2]}-${aux_data[1]}-${aux_data[0]}`;
+    // document.querySelector(`#edicao-data${index}`).value = data;
     document.querySelector(`#edicao-valor${index}`).value =
-      dados_doacoes[index].valor;
+      dados_doacoes[index].DR_money;
 
     //zerando tabela de itens
     let div_pai = document.querySelector(`#div-inputItens-edicao-${index}`);
@@ -180,36 +182,36 @@ export default function TelaGerenciarDoacao(props) {
 
     //inserindo itens na tabela
     //cria o elemento html e depois insere o valor dentro do input
-    for (let aux = 0; aux < dados_doacoes[index].itens.length; aux++) {
-      let div_linha = document.createElement("div");
-      div_linha.setAttribute("class", "div-itens-edicao");
-      div_linha.setAttribute("id", `div-itens-edicao-${index}-${aux}`);
+    // for (let aux = 0; aux < dados_doacoes[index].itens.length; aux++) {
+    //   let div_linha = document.createElement("div");
+    //   div_linha.setAttribute("class", "div-itens-edicao");
+    //   div_linha.setAttribute("id", `div-itens-edicao-${index}-${aux}`);
 
-      let input_descricao = document.createElement("input");
-      input_descricao.setAttribute("id", `descricao-item-${index}-${aux}`);
-      input_descricao.setAttribute("class", "input-descricao");
+    //   let input_descricao = document.createElement("input");
+    //   input_descricao.setAttribute("id", `descricao-item-${index}-${aux}`);
+    //   input_descricao.setAttribute("class", "input-descricao");
 
-      let input_qtd = document.createElement("input");
-      input_qtd.setAttribute("id", `qtd-item-${index}-${aux}`);
-      input_qtd.setAttribute("class", "input-quantidade");
+    //   let input_qtd = document.createElement("input");
+    //   input_qtd.setAttribute("id", `qtd-item-${index}-${aux}`);
+    //   input_qtd.setAttribute("class", "input-quantidade");
 
-      let input_tipo = document.createElement("input");
-      input_tipo.setAttribute("id", `tipo-item-${index}-${aux}`);
-      input_tipo.setAttribute("class", "input-tipo");
+    //   let input_tipo = document.createElement("input");
+    //   input_tipo.setAttribute("id", `tipo-item-${index}-${aux}`);
+    //   input_tipo.setAttribute("class", "input-tipo");
 
-      div_linha.appendChild(input_descricao);
-      div_linha.appendChild(input_qtd);
-      div_linha.appendChild(input_tipo);
+    //   div_linha.appendChild(input_descricao);
+    //   div_linha.appendChild(input_qtd);
+    //   div_linha.appendChild(input_tipo);
 
-      div_pai.appendChild(div_linha);
+    //   div_pai.appendChild(div_linha);
 
-      document.querySelector(`#descricao-item-${index}-${aux}`).value =
-        dados_doacoes[index].itens[aux].descricao;
-      document.querySelector(`#qtd-item-${index}-${aux}`).value =
-        dados_doacoes[index].itens[aux].quantidade;
-      document.querySelector(`#tipo-item-${index}-${aux}`).value =
-        dados_doacoes[index].itens[aux].tipo;
-    }
+    //   document.querySelector(`#descricao-item-${index}-${aux}`).value =
+    //     dados_doacoes[index].itens[aux].descricao;
+    //   document.querySelector(`#qtd-item-${index}-${aux}`).value =
+    //     dados_doacoes[index].itens[aux].quantidade;
+    //   document.querySelector(`#tipo-item-${index}-${aux}`).value =
+    //     dados_doacoes[index].itens[aux].tipo;
+    // }
   }
 
   /**

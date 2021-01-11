@@ -22,7 +22,6 @@ export default function TelaNovaDoacao() {
   const [DR_image, setImage] = useState('');
   const [DR_expiryDate, setExpiryDate] = useState('');
   const[donation_id, setDonationId] = useState('')
-
   const history = useHistory();
 
   async function handleRegister(e){
@@ -46,6 +45,10 @@ export default function TelaNovaDoacao() {
           let quantidade = document.querySelector(`#qtd-item${aux}`).value;
           let tipo = document.querySelector(`#tipo-item${aux}`).value;
       
+          document.querySelector(`#descricao-item${aux}`).value = "";
+          document.querySelector(`#qtd-item${aux}`).value = "";
+          document.querySelector(`#tipo-item${aux}`).value = "";
+
           itens.push({
             item_description: descricao,
             item_quantity: quantidade,
@@ -69,7 +72,13 @@ export default function TelaNovaDoacao() {
     
       });
 
-      //alert(`Causa cadastrada com sucesso!`);
+      document.getElementById("DR_description").value = "";
+      document.getElementById("DR_urgency").value = 1;
+      document.getElementById("DR_image").value = "";
+      document.getElementById("DR_expiryDate").value = "";
+      document.getElementById("DR_money").value = "";
+
+      alert(`Causa cadastrada com sucesso!`);
       //window.location.reload();
   }catch(err){
       console.log(err);
@@ -164,27 +173,29 @@ function RemoverItem() {
             />
         </div>
 
-        <div className="div-inputDado">
-          <label htmlFor="doacao-data">Data de Expiração</label>
-          <input 
-          type="date"
-          id="DR_expiryDate"
-          value = {DR_expiryDate}
-          onChange={(e) => setExpiryDate(e.target.value)}
-          name = "DR_expiryDate"
-          required
-          />
-        </div>
+        <div className="div-expiracao-valor">
+          <div className="div-inputDado">
+            <label htmlFor="doacao-data">Data de Expiração</label>
+            <input 
+            type="date"
+            id="DR_expiryDate"
+            value = {DR_expiryDate}
+            onChange={(e) => setExpiryDate(e.target.value)}
+            name = "DR_expiryDate"
+            required
+            />
+          </div>
 
-        <div className="div-inputDado">
-          <label htmlFor="doacao-valor">Valor</label>
-          <input 
-          type="number" 
-          id="DR_money"
-          name="DR_money"
-          value = {DR_money}
-          onChange={(e) => setMoney(e.target.value)} 
-          />
+          <div className="div-inputDado">
+            <label htmlFor="doacao-valor">Valor</label>
+            <input 
+            type="number" 
+            id="DR_money"
+            name="DR_money"
+            value = {DR_money}
+            onChange={(e) => setMoney(e.target.value)} 
+            />
+          </div>
         </div>
 
         <div className="div-inputDado">
