@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import './styles.css';
+import "./styles.css";
 
 import {
   Fundo,
@@ -81,23 +81,23 @@ function Login() {
           </p>
         </div>
         <div className="btnBemVindo">
-          <button type="submit" className="buttonONG">
-            <Link
-              to="/loginong"
-              style={{ textDecoration: "none", color: "white" }}
-            >
+          <Link
+            to="/loginong"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <button type="submit">
               ONG
-            </Link>
-          </button>
+            </button>
+          </Link>
 
-          <button type="submit" className="buttonUser">
-            <Link
-              to="/loginuser"
-              style={{ textDecoration: "none", color: "white" }}
-            >
+          <Link
+            to="/loginuser"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <button type="submit" className="buttonUser">
               Colaborador
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
         <QmSomos>
           <div className="aboutUs">
@@ -136,16 +136,31 @@ function Login() {
                 {lostanimals.map((lostanimal) => (
                   <>
                     {/*Modal Animal Perdido */}
-                    <div className="modal-animal-perdido" id={`LostAnimalModal-${lostanimal.LA_id}`}>
+                    <div
+                      className="modal-animal-perdido"
+                      id={`LostAnimalModal-${lostanimal.LA_id}`}
+                    >
                       <div className="modal-animal-perdido-main">
                         <div className="header-modal-animal-editar-doacao">
-                          <h2 className="titulo-animal-perdido">Informações Detalhadas</h2>
-                          <div className="botao-fechar" onClick={() => fecharModal(lostanimal.LA_id)}>
+                          <h2 className="titulo-animal-perdido">
+                            Informações Detalhadas
+                          </h2>
+                          <div
+                            className="botao-fechar"
+                            onClick={() => fecharModal(lostanimal.LA_id)}
+                          >
                             <FontAwesomeIcon icon={faTimes} />
                           </div>
                         </div>
                         <div className="div-imagem">
-                          <img className="LA_modal-imagem" src={lostanimal.LA_image.replace("uploads","http://localhost:3333")} alt="Foto do Animal"/>
+                          <img
+                            className="LA_modal-imagem"
+                            src={lostanimal.LA_image.replace(
+                              "uploads",
+                              "http://localhost:3333"
+                            )}
+                            alt="Foto do Animal"
+                          />
                         </div>
                         <div className="informacoes-modal-animal-perdido">
                           <p>{lostanimal.LA_description}</p>
@@ -154,7 +169,11 @@ function Login() {
                     </div>
 
                     <li key={lostanimal.LA_id}>
-                      <CardAnimal onClick={() => {abrirModal(lostanimal.LA_id)}}>
+                      <CardAnimal
+                        onClick={() => {
+                          abrirModal(lostanimal.LA_id);
+                        }}
+                      >
                         <div className="media">
                           <img
                             src={lostanimal.LA_image.replace(
@@ -233,7 +252,7 @@ function Login() {
 
   function abrirModal(index) {
     //tornando o modal visivel
-    
+
     document
       .querySelector(`#LostAnimalModal-${index}`)
       .setAttribute("style", "display:block");
