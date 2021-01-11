@@ -208,7 +208,7 @@ function Login() {
                     <CardONG>
                       <div className="media">
                         <img
-                          src={incident.ong_image.replace(
+                          src={incident.DR_image.replace(
                             "uploads",
                             "http://localhost:3333"
                           )}
@@ -221,7 +221,7 @@ function Login() {
                         <p>{incident.DR_description}</p>
                         <h4>{formatDate(incident.DR_date)}</h4>
                         <div className="localizacao">
-                          <h3>
+                          <h3>Valor a ser arrecadado:<br></br>
                             {Intl.NumberFormat("pt-BR", {
                               style: "currency",
                               currency: "BRL",
