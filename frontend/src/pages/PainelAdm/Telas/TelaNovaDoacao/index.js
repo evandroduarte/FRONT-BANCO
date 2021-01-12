@@ -78,7 +78,7 @@ export default function TelaNovaDoacao() {
       document.getElementById("DR_money").value = "";
 
       alert(`Causa cadastrada com sucesso!`);
-      //window.location.reload();
+      window.location.reload();
   }catch(err){
       console.log(err);
       alert(`Erro no cadastro`);
