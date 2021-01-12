@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
@@ -108,7 +108,7 @@ export default function TelaGerenciarDoacao(props) {
               </div>
 
               <div className="div-salvar">
-                <a id="salvar-edicao" onClick={() => SalvarEdicao(index)}>
+                <a id="salvar-edicao" onClick={() => SalvarEdicao(index, dado.DR_id)}>
                   Salvar Edição
                 </a>
               </div>
@@ -149,7 +149,7 @@ export default function TelaGerenciarDoacao(props) {
                 <a id="excluir-doacao" onClick={() => DeletarDoacao(dado.DR_id, index)}> Excluir Doação </a>
               </div>
               <div className="div-salvar">
-                <a id="salvar-doacao" onClick={() => abrirModal(index)}> Editar Doação </a>
+                <a id="salvar-doacao" onClick={() => abrirModal(index, dado.DR_id)}> Editar Doação </a>
               </div>
             </div>
           </div>
@@ -162,7 +162,9 @@ export default function TelaGerenciarDoacao(props) {
    * Abre o modal selecionado.
    * @param {Number} index Número do modal.
    */
-  function abrirModal(index) {
+  function abrirModal(index, DR_id) {
+    console.log(DR_id);
+
     //tornando o modal visivel
     document
       .querySelector(`#modal${index}`)
@@ -322,8 +324,8 @@ export default function TelaGerenciarDoacao(props) {
     }
   }
 
-  function SalvarEdicao(index) {
-    console.log(index);
+  async function SalvarEdicao(index, DR_id) {
+    console.log(DR_id);
 
     let aux_descricao = document.querySelector(`#edicao-descricao${index}`)
       .value;
@@ -345,13 +347,55 @@ export default function TelaGerenciarDoacao(props) {
       });
     }
 
+    const config = {
+      headers: { 'Authorization': `Bearer ${sessionStorage.getItem('ongToken')}`, 
+      'ong': `${sessionStorage.getItem('ongId')}`}
+    };
+
+    try{
+      await api.put('donationrequest/' + DR_id, {
+        DR_description: aux_descricao,
+        DR_urgency: aux_urgencia,
+        DR_money: aux_valor,
+        DR_expiryDate: aux_data,
+      },config)
+      .then(() => {
+        try{
+        api.delete("/items/" + DR_id, config)
+        .then(() => {
+          for (let aux = 0; aux < array_obj_itens.length; aux++) {
+            try{
+              api.post('items',         
+              {item_description: array_obj_itens[aux].item,
+              item_quantity: array_obj_itens[aux].quantidade,
+              item_type: array_obj_itens[aux].unidade,
+              donation_id: DR_id}
+              ,config)
+            window.location.reload();
+
+            }catch(err){
+              console.log(err);
+              alert(`Erro no cadastro`);
+            }
+          }
+        })
+        }catch(err){
+          console.log(err)
+        }
+      })
+    }catch(err){
+      console.log(err);
+      alert('Atualização mal sucedida!');
+    }
+
+
     // tá tudo dentro de:
     // aux_descricao
     // aux_urgencia
     // aux_data
     // aux_valor
     // aux_imagem
-    // array_obj_itens
+    // array_obj_itens*/
   }
 
   async function DeletarDoacao(DR_id, indexNoArray) {
@@ -372,6 +416,7 @@ export default function TelaGerenciarDoacao(props) {
       await api.delete("/items/" + DR_id, config).then(() => {
         api.delete("/donationrequest/" + DR_id, config);
       });
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
