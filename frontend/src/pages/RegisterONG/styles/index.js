@@ -83,8 +83,7 @@ export const Formulario = styled.div`
         width: 59%;
     }
     .input-cep{
-        width: 38%;
-        margin-left: 10px;
+        width: 100%;
     }
     .input-city{
         width: 78%;

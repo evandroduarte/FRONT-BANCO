@@ -69,7 +69,6 @@ export default function TelaNovaDoacao() {
             alert(`Erro no cadastro`);
           }
         }
-    
       });
 
       document.getElementById("DR_description").value = "";
