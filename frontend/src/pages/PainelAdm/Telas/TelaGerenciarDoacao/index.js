@@ -12,13 +12,11 @@ export default function TelaGerenciarDoacao(props) {
   //variavel que receberá as informações do banco
   const [dados_doacoes, setDoacoes] = useState(props.data);
 
-  console.log(props.data);
-
-  return dados_doacoes[0]?.DR_description == undefined ?   //se a doacao for vazia nao retorna nada.
+  return dados_doacoes[0]?.DR_description == undefined ? ( //se a doacao for vazia nao retorna nada.
     <div className="card-centro espacamento-inferior">
       <h2>Nenhuma doação cadastrada.</h2>
     </div>
-    : (
+  ) : (
     dados_doacoes.map(function (dado, index) {
       return (
         <>
@@ -39,41 +37,48 @@ export default function TelaGerenciarDoacao(props) {
                 <input type="text" id={`edicao-descricao${index}`} />
               </div>
 
-              <div className="div-editarDado">
-                <label htmlFor="edicao-urgencia">Urgência</label>
-                <select name="edicao" id={`edicao-urgencia${index}`}>
-                  <option value={1}>Tá suave</option>
-                  <option value={2}>Tá precisando</option>
-                  <option value={3}>Tá precisando urgente</option>
-                </select>
-              </div>
-
-              <div className="div-editarDado">
-                <label htmlFor="edicao-imagem">Imagem</label>
-                <input 
-                  type="file"
-                  id={`edicao-imagem${index}`}
-                  style={{
-                    background: "white",
-                    color: "black",
-                    width: "23rem",
-                  }}
-                />
-              </div>
-
               <div className="div-linha-edicao">
+                <div className={"div-editarDado"}>
+                  <label htmlFor="edicao-urgencia">Urgência</label>
+                  <select name="edicao" id={`edicao-urgencia${index}`}>
+                    <option value={1}>Tá suave</option>
+                    <option value={2}>Tá precisando</option>
+                    <option value={3}>Tá precisando urgente</option>
+                  </select>
+                </div>
                 <div className={"div-editarDado"}>
                   <label htmlFor="edicao-data">Data de Expiração</label>
                   <input type="date" id={`edicao-data${index}`} />
                 </div>
 
-                <div className="div-editarDado" style={{ marginLeft: "50px" }}>
+                <div className="div-editarDado">
                   <label htmlFor="edicao-valor">Valor</label>
                   <input
                     type="number"
                     style={{ padding: "7px", width: "12rem" }}
                     id={`edicao-valor${index}`}
                     min={0}
+                  />
+                </div>
+              </div>
+
+              <div className="div-editarDado">
+                <label htmlFor="edicao-imagem">Imagem</label>
+                <div className="div-editarDado-imagem">
+                  <img
+                    className="imagem-editarDado"
+                    src=""
+                    alt=""
+                    id={`edicao-imagem${index}`}
+                  />
+                  <input
+                    type="file"
+                    id={`edicao-imagem${index}`}
+                    style={{
+                      background: "white",
+                      color: "black",
+                      width: "23rem",
+                    }}
                   />
                 </div>
               </div>
@@ -103,7 +108,7 @@ export default function TelaGerenciarDoacao(props) {
               </div>
 
               <div className="div-salvar">
-                <a id="salvar-edicao" onClick={() => fecharModal(index)}>
+                <a id="salvar-edicao" onClick={() => SalvarEdicao(index)}>
                   Salvar Edição
                 </a>
               </div>
@@ -163,16 +168,26 @@ export default function TelaGerenciarDoacao(props) {
       .querySelector(`#modal${index}`)
       .setAttribute("style", "display:block");
 
-    console.log(dados_doacoes);
-
     //carregando valores para os inputs
     document.querySelector(`#edicao-descricao${index}`).value =
       dados_doacoes[index].DR_description;
     document.querySelector(`#edicao-urgencia${index}`).value =
       dados_doacoes[index].DR_urgency;
-    let aux_data = dados_doacoes[index].DR_expiryDate //.split("/");
-    // let data = `${aux_data[2]}-${aux_data[1]}-${aux_data[0]}`;
-    // document.querySelector(`#edicao-data${index}`).value = data;
+
+    document.querySelector(`#edicao-imagem${index}`).src = dados_doacoes[
+      index
+    ].ong_image.replace("uploads", "http://localhost:3333");
+
+    let aux_data = dados_doacoes[index].DR_expiryDate;
+    let data = new Date(aux_data);
+    let ano = data.getFullYear();
+    let mes = data.getMonth() + 1;
+    let dia = data.getDate();
+    console.log(`${ano}-${mes}-${dia}`);
+    document.querySelector(
+      `#edicao-data${index}`
+    ).value = `${ano}-${mes}-${dia}`;
+
     document.querySelector(`#edicao-valor${index}`).value =
       dados_doacoes[index].DR_money;
 
@@ -180,38 +195,50 @@ export default function TelaGerenciarDoacao(props) {
     let div_pai = document.querySelector(`#div-inputItens-edicao-${index}`);
     div_pai.innerHTML = "";
 
+    let array_itens = dados_doacoes[index].ItemsDescription.split(",");
+    let array_quantidades = dados_doacoes[index].ItemsQuantity.split(",");
+    let array_unidades = dados_doacoes[index].ItemsType.split(",");
+    let tamanho_array = array_itens.length;
+
     //inserindo itens na tabela
     //cria o elemento html e depois insere o valor dentro do input
-    // for (let aux = 0; aux < dados_doacoes[index].itens.length; aux++) {
-    //   let div_linha = document.createElement("div");
-    //   div_linha.setAttribute("class", "div-itens-edicao");
-    //   div_linha.setAttribute("id", `div-itens-edicao-${index}-${aux}`);
+    for (let aux = 0; aux < tamanho_array; aux++) {
+      let div_linha = document.createElement("div");
+      div_linha.setAttribute("class", "div-itens-edicao");
+      div_linha.setAttribute("id", `div-itens-edicao-${index}-${aux}`);
 
-    //   let input_descricao = document.createElement("input");
-    //   input_descricao.setAttribute("id", `descricao-item-${index}-${aux}`);
-    //   input_descricao.setAttribute("class", "input-descricao");
+      let input_descricao = document.createElement("input");
+      input_descricao.setAttribute("id", `descricao-item-${index}-${aux}`);
+      input_descricao.setAttribute("class", "input-descricao");
 
-    //   let input_qtd = document.createElement("input");
-    //   input_qtd.setAttribute("id", `qtd-item-${index}-${aux}`);
-    //   input_qtd.setAttribute("class", "input-quantidade");
+      let input_qtd = document.createElement("input");
+      input_qtd.setAttribute("id", `qtd-item-${index}-${aux}`);
+      input_qtd.setAttribute("class", "input-quantidade");
 
-    //   let input_tipo = document.createElement("input");
-    //   input_tipo.setAttribute("id", `tipo-item-${index}-${aux}`);
-    //   input_tipo.setAttribute("class", "input-tipo");
+      let input_tipo = document.createElement("input");
+      input_tipo.setAttribute("id", `tipo-item-${index}-${aux}`);
+      input_tipo.setAttribute("class", "input-tipo");
 
-    //   div_linha.appendChild(input_descricao);
-    //   div_linha.appendChild(input_qtd);
-    //   div_linha.appendChild(input_tipo);
+      let input_excluir = document.createElement("a");
+      input_excluir.setAttribute("id", `excluir-item-${index}-${aux}`);
+      input_excluir.setAttribute("class", "input-icone");
+      input_excluir.innerHTML = "&#128465";
+      input_excluir.onclick = () => removerLinha(index, aux);
 
-    //   div_pai.appendChild(div_linha);
+      div_linha.appendChild(input_descricao);
+      div_linha.appendChild(input_qtd);
+      div_linha.appendChild(input_tipo);
+      div_linha.appendChild(input_excluir);
 
-    //   document.querySelector(`#descricao-item-${index}-${aux}`).value =
-    //     dados_doacoes[index].itens[aux].descricao;
-    //   document.querySelector(`#qtd-item-${index}-${aux}`).value =
-    //     dados_doacoes[index].itens[aux].quantidade;
-    //   document.querySelector(`#tipo-item-${index}-${aux}`).value =
-    //     dados_doacoes[index].itens[aux].tipo;
-    // }
+      div_pai.appendChild(div_linha);
+
+      document.querySelector(`#descricao-item-${index}-${aux}`).value =
+        array_itens[aux];
+      document.querySelector(`#qtd-item-${index}-${aux}`).value =
+        array_quantidades[aux];
+      document.querySelector(`#tipo-item-${index}-${aux}`).value =
+        array_unidades[aux];
+    }
   }
 
   /**
@@ -261,7 +288,7 @@ export default function TelaGerenciarDoacao(props) {
   }
 
   /**
-   * Remove uma linha dos itens de doação.
+   * Remove a última linha dos itens de doação.
    */
   function RemoverItem(index) {
     const qtd_itens =
@@ -270,18 +297,67 @@ export default function TelaGerenciarDoacao(props) {
 
     if (qtd_itens >= 0) {
       let div_linha_remover = document.querySelector(
-        `#div-itens-edicao-${index}-${qtd_itens}`
+        `#div-inputItens-edicao-${index}`
+      );
+      div_linha_remover.children[qtd_itens].remove();
+    }
+  }
+
+  /**
+   * Remove uma linha específica do item.
+   * @param {Number} index Indice do modal.
+   */
+  function removerLinha(index, aux) {
+    console.log(index, aux);
+
+    const qtd_itens =
+      document.querySelector(`#div-inputItens-edicao-${index}`)
+        .childElementCount - 1;
+
+    if (qtd_itens >= 0) {
+      let div_linha_remover = document.querySelector(
+        `#div-itens-edicao-${index}-${aux}`
       );
       div_linha_remover.remove();
     }
   }
 
+  function SalvarEdicao(index) {
+    console.log(index);
+
+    let aux_descricao = document.querySelector(`#edicao-descricao${index}`)
+      .value;
+    let aux_urgencia = document.querySelector(`#edicao-urgencia${index}`).value;
+    let aux_data = document.querySelector(`#edicao-data${index}`).value;
+    let aux_valor = document.querySelector(`#edicao-valor${index}`).value;
+    let aux_imagem = document.querySelector(`#edicao-imagem${index}`).value;
+
+    let aux_itens_necessarios = document.querySelector(
+      `#div-inputItens-edicao-${index}`
+    );
+    let array_obj_itens = [];
+
+    for (let aux = 0; aux < aux_itens_necessarios.children.length; aux++) {
+      array_obj_itens.push({
+        item: aux_itens_necessarios.children[aux].children[0].value,
+        quantidade: aux_itens_necessarios.children[aux].children[1].value,
+        unidade: aux_itens_necessarios.children[aux].children[2].value,
+      });
+    }
+
+    // tá tudo dentro de:
+    // aux_descricao
+    // aux_urgencia
+    // aux_data
+    // aux_valor
+    // aux_imagem
+    // array_obj_itens
+  }
+
   async function DeletarDoacao(DR_id, indexNoArray) {
     let aux_remover_item = dados_doacoes;
-    console.log(aux_remover_item);
 
-    aux_remover_item.splice(indexNoArray,1);
-    console.log(aux_remover_item);
+    aux_remover_item.splice(indexNoArray, 1);
 
     setDoacoes([...aux_remover_item]);
 
@@ -293,10 +369,9 @@ export default function TelaGerenciarDoacao(props) {
     };
 
     try {
-      await api.delete('/items/' + DR_id, config)
-      .then(() => {
-       api.delete("/donationrequest/" + DR_id, config)
-      })
+      await api.delete("/items/" + DR_id, config).then(() => {
+        api.delete("/donationrequest/" + DR_id, config);
+      });
     } catch (err) {
       console.log(err);
     }

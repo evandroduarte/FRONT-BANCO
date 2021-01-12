@@ -173,6 +173,20 @@ tr:nth-child(odd) {
   text-align: justify;
 }
 
+.div-editarDado-imagem{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.imagem-editarDado{
+  margin-top: auto;
+  margin-bottom: 0px;
+  width: 200px;
+  height: auto;
+  padding-right: 10px;
+}
+
 .espaco-esq {
   margin-left: 2rem;
 }
@@ -181,6 +195,7 @@ tr:nth-child(odd) {
     display: flex;
     flex-direction: column;
     margin-bottom: 1.2rem;
+    margin-right: 50px;
 }
 
 .div-editarDado label {
@@ -210,10 +225,10 @@ tr:nth-child(odd) {
 .div-itens-edicao {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   padding-top: 5px;
   margin-bottom: 10px;
+  justify-content: space-around;
 }
 
 .div-itens-edicao .input-tipo{
@@ -221,13 +236,15 @@ tr:nth-child(odd) {
   align-self: center;
   margin: 0;
   color: white;
+  margin-right: 30px;
 }
 
 .div-itens-edicao .input-descricao {
-  width: 60%;
+  width: 70%;
   align-self: center;
   margin: 0;
   color: white;
+  margin-right: 30px;
 }
 
 .div-itens-edicao .input-quantidade {
@@ -235,6 +252,7 @@ tr:nth-child(odd) {
   align-self: center;
   margin: 0;
   color: white;
+  margin-right: 30px;
 }
 
 .div-itens-edicao input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -267,4 +285,9 @@ tr:nth-child(odd) {
 
 .div-editarDado-tabela .div-inputItens{
   height: 7rem;
+}
+
+.input-icone{
+  width: 5%;
+  font-size: 15px;
 }

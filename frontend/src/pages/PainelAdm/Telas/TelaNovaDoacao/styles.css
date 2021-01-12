@@ -138,7 +138,7 @@ select:focus {
   /* color: gray; */
 }
 
-.button:hover{
+.button:hover, .button:focus{
   background-color: #7d0eb1;
   color: white
 }
