@@ -413,8 +413,8 @@ export default function TelaGerenciarDoacao(props) {
     };
 
     try {
-      await api.delete("/items/" + DR_id, config).then(() => {
-        api.delete("/donationrequest/" + DR_id, config);
+      await api.delete("/items/" + DR_id, config).then(async () => {
+        await api.delete("/donationrequest/" + DR_id, config);
       });
       window.location.reload();
     } catch (err) {
