@@ -106,6 +106,7 @@ export const Listagem = styled.div`
 
   ul {
     list-style-type: none;
+    z-index: -1;
   }
 `;
 
@@ -114,7 +115,6 @@ export const CasosONG = styled.div`
   height: 1300px;
   display: flex;
   flex-direction: column;
-  z-index: 0;
 `;
 export const CasosAnimal = styled.div`
   width: 48%;

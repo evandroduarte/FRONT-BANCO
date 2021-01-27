@@ -200,7 +200,7 @@ function Login() {
           </CasosAnimal>
           <CasosONG>
             <img src={causasOngs} alt="Causas Ongs" className="titulos" />
-            <SimpleBar>
+            <SimpleBar id="lista-ongs">
               <ul className="list">
                 {incidents.map((incident, index) => (
                   <>
@@ -283,11 +283,12 @@ function Login() {
    * @param {Number} index Indice do modal.
    */
   function fecharModal(controle, index) {
-    if (controle === 1)
+    if (controle === 1){
       document
         .querySelector(`#LostAnimalModal-${index}`)
         .setAttribute("style", "display:none");
-    else if (controle === 2)
+      document.querySelector("#lista-ongs").style.zIndex = 1;      
+    }else if (controle === 2)
       document
         .querySelector(`#OngModal-${index}`)
         .setAttribute("style", "display:none");
@@ -297,10 +298,12 @@ function Login() {
 
   async function abrirModal(controle, index) {
     //tornando o modal visivel
-    if (controle === 1)   //Animal perdido
+    if (controle === 1){   //Animal perdido
       document
         .querySelector(`#LostAnimalModal-${index}`)
         .setAttribute("style", "display:block");
+      document.querySelector("#lista-ongs").style.zIndex = -1;
+    }
     else if (controle === 2) {  //Donation
       document
         .querySelector(`#OngModal-${index}`)
