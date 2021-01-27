@@ -43,7 +43,6 @@ function Login() {
   useEffect(() => {
     api.get("lostanimals").then((response) => {
       setLostAnimals(response.data);
-      console.log(response.data);
     });
   }, []);
 
@@ -67,8 +66,6 @@ function Login() {
 
     return day + "/" + month + "/" + year;
   }
-
-  console.log(incidents);
 
   return (
     <Fundo>
@@ -238,8 +235,7 @@ function Login() {
                         <div className="informacoes-modal-animal-perdido">
                           <p>{incident.DR_description}</p>
                         </div>
-                        <div className="items-necessarios-modal-doacao">
-
+                        <div className={`items-necessarios-modal-doacao${incident.DR_id}`}>
                         </div>
                       </div>
                     </div>
@@ -296,8 +292,7 @@ function Login() {
         .querySelector(`#OngModal-${index}`)
         .setAttribute("style", "display:none");
       
-        let divPedidos = document.querySelector(".items-necessarios-modal-doacao");
-        divPedidos.innerText = "";
+      document.querySelector(`.items-necessarios-modal-doacao${index}`).textContent = "";
   }
 
   async function abrirModal(controle, index) {
@@ -312,9 +307,7 @@ function Login() {
         .setAttribute("style", "display:block");
 
         await api.get("items/"+index).then((response) => {
-          console.log(response.data[0]);
-
-          let divPedidos = document.querySelector(".items-necessarios-modal-doacao");
+          let divPedidos = document.querySelector(`.items-necessarios-modal-doacao${index}`);
           for(let aux = 0; aux < response.data.length; aux++){
             let item = document.createElement("p");
             item.textContent = response.data[aux].item_description;
