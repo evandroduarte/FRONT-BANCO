@@ -114,7 +114,7 @@ export const CasosONG = styled.div`
   height: 1300px;
   display: flex;
   flex-direction: column;
-  z-index: -1;
+  z-index: 0;
 `;
 export const CasosAnimal = styled.div`
   width: 48%;

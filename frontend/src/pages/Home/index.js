@@ -68,6 +68,8 @@ function Login() {
     return day + "/" + month + "/" + year;
   }
 
+  console.log(incidents);
+
   return (
     <Fundo>
       <Content>
@@ -85,9 +87,7 @@ function Login() {
             to="/loginong"
             style={{ textDecoration: "none", color: "white" }}
           >
-            <button type="submit">
-              ONG
-            </button>
+            <button type="submit">ONG</button>
           </Link>
 
           <Link
@@ -131,12 +131,13 @@ function Login() {
               alt="Animais Perdidos"
               className="titulos"
             />
-            <SimpleBar style={{ height: "1300px" }}>
+            <SimpleBar>
               <ul className="list">
-                {lostanimals.map((lostanimal) => (
+                {lostanimals.map((lostanimal, index) => (
                   <>
                     {/*Modal Animal Perdido */}
                     <div
+                      key={index}
                       className="modal-animal-perdido"
                       id={`LostAnimalModal-${lostanimal.LA_id}`}
                     >
@@ -147,7 +148,7 @@ function Login() {
                           </h2>
                           <div
                             className="botao-fechar"
-                            onClick={() => fecharModal(lostanimal.LA_id)}
+                            onClick={() => fecharModal(1, lostanimal.LA_id)}
                           >
                             <FontAwesomeIcon icon={faTimes} />
                           </div>
@@ -170,8 +171,9 @@ function Login() {
 
                     <li key={lostanimal.LA_id}>
                       <CardAnimal
+                        key={index}
                         onClick={() => {
-                          abrirModal(lostanimal.LA_id);
+                          abrirModal(1, lostanimal.LA_id);
                         }}
                       >
                         <div className="media">
@@ -201,36 +203,76 @@ function Login() {
           </CasosAnimal>
           <CasosONG>
             <img src={causasOngs} alt="Causas Ongs" className="titulos" />
-            <SimpleBar style={{ height: "1300px" }}>
-              <ul>
-                {incidents.map((incident) => (
-                  <li key={incident.DR_id}>
-                    <CardONG>
-                      <div className="media">
-                        <img
-                          src={incident.DR_image.replace(
-                            "uploads",
-                            "http://localhost:3333"
-                          )}
-                          className="imagem"
-                          alt="Ong"
-                        />
-                      </div>
-                      <div className="descricao">
-                        <h1>{incident.ong_name}</h1>
-                        <p>{incident.DR_description}</p>
-                        <h4>{formatDate(incident.DR_date)}</h4>
-                        <div className="localizacao">
-                          <h3>Valor a ser arrecadado:<br></br>
-                            {Intl.NumberFormat("pt-BR", {
-                              style: "currency",
-                              currency: "BRL",
-                            }).format(incident.DR_money)}
-                          </h3>
+            <SimpleBar>
+              <ul className="list">
+                {incidents.map((incident, index) => (
+                  <>
+                    {/* Modal */}
+                    <div
+                      key={index}
+                      className="modal-animal-perdido"
+                      id={`OngModal-${incident.DR_id}`}
+                    >
+                      <div className="modal-animal-perdido-main">
+                        <div className="header-modal-animal-editar-doacao">
+                          <h2 className="titulo-animal-perdido">
+                            Informações Detalhadas
+                          </h2>
+                          <div
+                            className="botao-fechar"
+                            onClick={() => fecharModal(2, incident.DR_id)}
+                          >
+                            <FontAwesomeIcon icon={faTimes} />
+                          </div>
+                        </div>
+                        <div className="div-imagem">
+                          <img
+                            className="DR_modal-imagem"
+                            src={incident.DR_image.replace(
+                              "uploads",
+                              "http://localhost:3333"
+                            )}
+                            alt="Foto do Pedido"
+                          />
+                        </div>
+                        <div className="informacoes-modal-animal-perdido">
+                          <p>{incident.DR_description}</p>
+                        </div>
+                        <div className="items-necessarios-modal-doacao">
+
                         </div>
                       </div>
-                    </CardONG>
-                  </li>
+                    </div>
+
+                    <li key={incident.DR_id}>
+                      <CardONG onClick={() => abrirModal(2,incident.DR_id)}>
+                        <div className="media">
+                          <img
+                            src={incident.DR_image.replace(
+                              "uploads",
+                              "http://localhost:3333"
+                            )}
+                            className="imagem"
+                            alt="Imagem da Ong"
+                          />
+                        </div>
+                        <div className="descricao">
+                          <h1>{incident.ong_name}</h1>
+                          <p>{incident.DR_description}</p>
+                          <h4>{formatDate(incident.DR_date)}</h4>
+                          <div className="localizacao">
+                            <h3>
+                              Valor a ser arrecadado:<br></br>
+                              {Intl.NumberFormat("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              }).format(incident.DR_money)}
+                            </h3>
+                          </div>
+                        </div>
+                      </CardONG>
+                    </li>
+                  </>
                 ))}
               </ul>
             </SimpleBar>
@@ -244,18 +286,58 @@ function Login() {
    * Fecha o modal aberto.
    * @param {Number} index Indice do modal.
    */
-  function fecharModal(index) {
-    document
-      .querySelector(`#LostAnimalModal-${index}`)
-      .setAttribute("style", "display:none");
+  function fecharModal(controle, index) {
+    if (controle === 1)
+      document
+        .querySelector(`#LostAnimalModal-${index}`)
+        .setAttribute("style", "display:none");
+    else if (controle === 2)
+      document
+        .querySelector(`#OngModal-${index}`)
+        .setAttribute("style", "display:none");
+      
+        let divPedidos = document.querySelector(".items-necessarios-modal-doacao");
+        divPedidos.innerText = "";
   }
 
-  function abrirModal(index) {
+  async function abrirModal(controle, index) {
     //tornando o modal visivel
+    if (controle === 1)   //Animal perdido
+      document
+        .querySelector(`#LostAnimalModal-${index}`)
+        .setAttribute("style", "display:block");
+    else if (controle === 2) {  //Donation
+      document
+        .querySelector(`#OngModal-${index}`)
+        .setAttribute("style", "display:block");
 
-    document
-      .querySelector(`#LostAnimalModal-${index}`)
-      .setAttribute("style", "display:block");
+        await api.get("items/"+index).then((response) => {
+          console.log(response.data[0]);
+
+          let divPedidos = document.querySelector(".items-necessarios-modal-doacao");
+          for(let aux = 0; aux < response.data.length; aux++){
+            let item = document.createElement("p");
+            item.textContent = response.data[aux].item_description;
+            item.setAttribute("class","item-descricao");
+
+            let unidade = document.createElement("p");
+            unidade.textContent = response.data[aux].item_type;
+            unidade.setAttribute("class","item-unidade");
+
+            let quantidade = document.createElement("p");
+            quantidade.textContent = response.data[aux].item_quantity;
+            quantidade.setAttribute("class","item-quantidade");
+
+            let divItem = document.createElement("div");
+            divItem.setAttribute("class", "div-item-linha");
+            divItem.appendChild(item);
+            divItem.appendChild(quantidade);
+            divItem.appendChild(unidade);
+
+            divPedidos.appendChild(divItem);
+          }
+        });
+    }
   }
 }
 

@@ -44,6 +44,14 @@
   max-width: 600px;
 }
 
+.DR_modal-imagem{
+  height: 100%;
+  width: auto;
+
+  max-height: 200px;
+  max-width: 400px;
+}
+
 .header-modal-animal-editar-doacao{
     display: flex;
     /* border-bottom: 1px solid black; */
@@ -64,4 +72,24 @@
 
     padding: 1rem;
     overflow-y: auto;
+}
+
+.div-item-linha{
+  display: flex;
+  justify-content: space-around;
+  font-size: medium;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.item-descricao{
+  width: 80%;
+}
+
+.item-quantidade{
+  width: 10%;
+}
+
+.item-unidade{
+  width: 10%;
 }
