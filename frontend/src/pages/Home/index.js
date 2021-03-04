@@ -184,7 +184,7 @@ function Login() {
                           />
                         </div>
                         <div className="descricao">
-                          <p>{lostanimal.LA_description}</p>
+                          <h1>{lostanimal.LA_description}</h1>
                           <h3>{formatDate(lostanimal.LA_date)}</h3>
                           <div className="localizacao">
                             <FiMapPin size={16} color="#463B88" />
